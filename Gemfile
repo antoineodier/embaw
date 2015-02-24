@@ -4,14 +4,14 @@ ruby "2.2.0"
 
 gem "rails", "4.2.0"
 gem "pg"
-gem "figaro"
+gem "figaro", '~> 1.1.0'
 gem "simple_form"
 gem "country_select"
 gem "high_voltage"
 gem "devise"
 gem "pundit"
 gem "paperclip"
-gem "aws-sdk"
+gem "aws-sdk", '< 2.0'
 
 gem "jquery-rails"
 gem "sass-rails", "~> 5.0"
