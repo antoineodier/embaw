@@ -25,6 +25,8 @@ gem "devise-i18n-views"
 
 gem 'activeadmin', github: 'activeadmin'
 
+gem "octokit", "~> 3.0"
+
 group :development, :test do
   gem "spring"
   gem "annotate"
