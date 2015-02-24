@@ -23,6 +23,8 @@ gem "rails-i18n"
 gem "devise-i18n"
 gem "devise-i18n-views"
 
+gem 'activeadmin', github: 'activeadmin'
+
 group :development, :test do
   gem "spring"
   gem "annotate"
