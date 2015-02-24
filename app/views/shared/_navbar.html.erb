@@ -9,7 +9,8 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <%= image_tag "logo.jpg" %>
+        <%= "Home" %>
+        <!--<%= image_tag "fichier.ext" %>-->
       </a>
     </div>
 
@@ -47,15 +48,15 @@
           </li>
         <% else %>
           <li>
-            <%= link_to t(".sign_up", default: "Sign up"), new_user_registration_path %>
+            <%= link_to t(".sign_up", default: "Inscription"), new_user_registration_path %>
           </li>
           <li>
-            <%= link_to t(".sign_in", default: "Sign in"), new_user_session_path %>
+            <%= link_to t(".sign_in", default: "Connection"), new_user_session_path %>
           </li>
         <% end %>
-        <li>
+        <!-- <li>
           <%= link_to t(".top_call_to_action", default: "Rent your flat"), "#", class: "btn" %>
-        </li>
+        </li> -->
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
