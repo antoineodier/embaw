@@ -1,1 +1,2 @@
-<%= @transcription.xml_content %>
+<% document = Nokogiri::XML(@transcription.xml_content) %>
+<%= document.search('body') %>
