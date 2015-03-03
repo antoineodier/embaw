@@ -1,2 +1,8 @@
-<% document = Nokogiri::XML(@transcription.xml_content) %>
-<%= document.search('body') %>
+
+    <% document = Nokogiri::XML(@transcription.xml_content) %>
+
+    <% transformed_document = @template.transform(document) %>
+
+    <%= raw(transformed_document) %>
+
+
