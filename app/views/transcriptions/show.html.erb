@@ -1,3 +1,7 @@
-    <%= raw(@transformed_document) %>
+
+
+    <%= raw("<br><i><b>Pagination manuscrit : 1r</b></i>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : 1r</b></i>")}(.*?)#{Regexp.escape("<br><i><b>Pagination manuscrit : 1v</b></i>")}/m, 1]) %>
+
+
 
 
