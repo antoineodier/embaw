@@ -7,6 +7,7 @@ class TranscriptionsController < ApplicationController
     @document = Nokogiri::XML(@transcription.xml_content)
     @template = Nokogiri::XSLT(File.read('tei-transcript-simple.xsl'))
     @transformed_document = @template.transform(@document)
+    @scan = Scan.find(3)
   end
 
   private
