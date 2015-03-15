@@ -8,7 +8,7 @@
     <!-- Einbindung der Standard-Templates und Variablen -->
     <xsl:import href="http://diglib.hab.de/rules/styles/param.xsl"/>
     <!--<xsl:import href="http://diglib.hab.de/rules/styles/tei-phraselevel.xsl"/>-->
-   
+
 
 
     <xsl:output encoding="UTF-8" indent="yes" method="html"
@@ -27,7 +27,7 @@
     <xsl:variable name="metsfile">
         <xsl:value-of select="concat('http://diglib.hab.de/',$dir,'/mets.xml')"/>
     </xsl:variable>
-   
+
     <xsl:variable name="smallcase" select="'&#173;'"/>
     <xsl:variable name="uppercase" select="'-'"/>
 
@@ -47,7 +47,7 @@
                 <title>WDB</title>
                 <link  rel="stylesheet" type="text/css" media="screen" href="http://diglib.hab.de/edoc/ed000228/layout/navigator.css"/>
                 <!--<link rel="stylesheet" type="text/css" media="print"
-                    href="http://diglib.hab.de/edoc/ed000228/layout/print.css"/>-->      
+                    href="http://diglib.hab.de/edoc/ed000228/layout/print.css"/>-->
                 <script type="text/javascript" src="http://diglib.hab.de/edoc/ed000228/javascript/jquery/jquery-1.11.0.js"></script>
                 <script type="text/javascript" src="http://diglib.hab.de/edoc/ed000228/javascript/jquery/functions.js"></script>
                 <script src="http://diglib.hab.de/navigator.js" type="text/javascript"></script>
@@ -60,13 +60,7 @@
                     <div id="doc_header_text">Text</div>
                     <hr id="doc_header_line"/>
                     </div>
-                
-                <div id="wip" style="background-color: #EEE; padding: 0.5em; border: 1px solid black; font-size: 11pt; text-align: center; margin-bottom: 2em;">
-                    <p><xsl:text>&#x27A8; Hinweis: Die Edition ist in Bearbeitung und daher nur eingeschränkt zitierfähig.</xsl:text></p>
-                    <p><xsl:text>Bis *** sind Änderungen und Korrekturen am Text und in den Apparaten möglich.</xsl:text></p>
-                    <p><xsl:text>Danach werden etwaige Korrekturen und Ergänzungen in einem Änderungsregister gelistet.</xsl:text></p>
-                </div> <!-- end WorkInProgress -->
-                
+
                 <!-- Titel -->
                 <div id="caption">
                     <div>
@@ -82,37 +76,14 @@
                         <xsl:text> </xsl:text>
                     </div>
                 </div>
-                
-                <!-- Inhaltsuebersicht -->
-                <a href="javascript:switchlayer('headings');">
-                    <div style="margin: 1em 0 1em 0;">[Inhaltsverzeichnis]</div>
-                </a>
-                <div id="headings">
-                    <ul>
-                        <xsl:for-each select="/tei:TEI/tei:text/tei:body//tei:div/tei:head">
-                            <li>
-                                <!--<xsl:number level="multiple" count="tei:div" format="1.1. "/>-->
-                                <a>
-                                    
-                                    <xsl:attribute name="href">
-                                        <xsl:text>#hd</xsl:text>
-                                        <xsl:number level="any"/>
-                                    </xsl:attribute>
-                                    <xsl:apply-templates mode="toc" />
-                                </a>
-                                
-                            </li>
-                        </xsl:for-each>
-                    </ul>
-                </div>
 
 
                 <div class="content">
                     <!-- Haupttext -->
                 </div>
                 <xsl:apply-templates select="tei:TEI/tei:text"/>
-                
-                             
+
+
                 <!-- Textapparat  -->
                 <xsl:if test="tei:TEI/tei:text/tei:body/tei:div[@type='annotation'] | tei:TEI/tei:text/tei:body//tei:note[@type='annotation']">
                     <hr/>
@@ -138,7 +109,7 @@
                                     select="tei:TEI/tei:text/tei:body/tei:div[@type='annotation']"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                
+
                                 <!--  andernfalls notes auswerten -->
                                 <xsl:for-each
                                     select="tei:TEI/tei:text/tei:body//tei:note[@type='annotation']">
@@ -175,7 +146,7 @@
                     <hr/>
                 </xsl:if>
                 <div style="background-color:#EEE;">
-                    
+
                     <xsl:if test="tei:TEI/tei:text/tei:body//tei:note[@type='footnote']">
                         <div
                             style="font-size:13pt;
@@ -257,7 +228,7 @@
 
                 <!-- footer -->
                 <div id="doc_footer">
-                 
+
                     <xsl:choose>
                         <xsl:when
                             test="document($metsfile)//mets:rightsMD[@ID=document($metsfile)//mets:div[@TYPE='bibliography']/@ADMID]/mets:mdRef/@xlink:href">
@@ -280,42 +251,26 @@
                                     alt="image CC BY-SA licence" width="50px" align="right"
                                     hspace="10px"/>
                             </a>
-                            <div>
-                                <a href="#" onclick="window.print(); return false"><img
-                                        src="http://diglib.hab.de/edoc/ed000228/images/printer.png"/>
-                                    Seite drucken</a>
-                            </div>
+
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of
                                 select="document($metsfile)//mets:rightsMD[@ID=document($metsfile)//mets:div[@TYPE='bibliography']/@ADMID]/mets:mdWrap/mets:xmlData"/>
-                            <div>
-                                <a href="#" onclick="window.print(); return false"><img height="25px" name="Crystal Clear app kjobviewer by Everaldo Coelho and YellowIcon - All Crystal icons were posted by the author as LGPL on kde-look. Licensed under GNU Lesser General Public License via Wikimedia Commons"
-                                        src="http://diglib.hab.de/edoc/ed000228/images/printer.png"/>
-                                    Seite drucken</a>
-                            </div>
+
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
-                <xsl:call-template name="footer">
-                    <xsl:with-param name="footerXML">
-                        <xsl:value-of select="$footerXML"/>
-                    </xsl:with-param>
-                    <xsl:with-param name="footerXSL">
-                        <xsl:value-of select="$footerXSL"/>
-                    </xsl:with-param>
 
-                </xsl:call-template>               
                 <!-- Ende main -->
                 <div id="info_gloss">
                     <xsl:call-template name="gloss_foot" />
                 </div>
                 <div id="info_person">
                   <xsl:apply-templates select="//tei:person"/>
-                </div>       
+                </div>
                 <div id="info_place">
                     <xsl:apply-templates select="//tei:place"/>
-                </div>                
+                </div>
             </body>
         </html>
     </xsl:template>
@@ -323,15 +278,15 @@
     <xsl:template match="tei:body | tei:front">
         <xsl:apply-templates/>
     </xsl:template>
-    
+
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         ++++++++++++++++++++++++++++++++++++++++ editionsspezifische Anweisungen ++++++++++++++++++++++++++++++++++++++++++++
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-    
+
   <!-- mehrspaltiger Text -->
-    
+
     <xsl:template match="tei:cb">
         <xsl:if test="@n='1'">
             <div class="cb_left">
@@ -344,106 +299,106 @@
             </div>
         </xsl:if>
     </xsl:template>
-    
+
     <!-- preserve-space schützt alle Whitespaces -->
-    
+
     <xsl:preserve-space elements="*"/>
-    
+
     <!-- Zeilenumbruch, bzw. Whitespace innerhalb von <w> unterdrücken -->
-    
+
     <xsl:template match="tei:w">
         <xsl:apply-templates/>
     </xsl:template>
-    
+
     <xsl:template match="tei:lb">
         <br/>
     </xsl:template>
-    
+
     <xsl:template match="text()[parent::tei:w]">
         <xsl:value-of select="normalize-space()"/>
     </xsl:template>
-    
+
     <xsl:template match="tei:lb[parent::tei:w]">
-       <xsl:text>-</xsl:text><br/>        
+       <xsl:text>-</xsl:text><br/>
     </xsl:template>
-    
+
     <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-    
-    
+
+
     <xsl:template match="tei:ex">
         <span class="ex">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-    
+
     <xsl:template match="tei:del">
         <span id="del">
             <xsl:apply-templates/>
         </span>
     </xsl:template>
-    
+
     <xsl:template match="tei:unclear">
         <span id="unclear">[<xsl:apply-templates/>]</span>
     </xsl:template>
-    
-    
+
+
     <xsl:template match="//*[@rend='line']">
         <hr/>
-            <xsl:apply-templates/>        
+            <xsl:apply-templates/>
     </xsl:template>
-    
+
     <xsl:template match="tei:add">
         &lt;<xsl:apply-templates/>&gt;
     </xsl:template>
-    
-    
-    
-    <!-- hoch- und tiefgestellte Buchstaben -->   
+
+
+
+    <!-- hoch- und tiefgestellte Buchstaben -->
     <xsl:template match="tei:c[@rend='super']">
         <sup>
             <xsl:apply-templates/>
-        </sup>        
+        </sup>
     </xsl:template>
-    
+
     <xsl:template match="tei:c[@rend='sub']">
         <sub style="color:red;">
             <xsl:apply-templates/>
-        </sub>        
+        </sub>
     </xsl:template>
-    
-      
+
+
     <!-- Tabellen -->
-    
-    <xsl:template match="tei:table">        
-        <table>            
-            <xsl:for-each select="tei:row[@role='label']">                  
-                    
+
+    <xsl:template match="tei:table">
+        <table>
+            <xsl:for-each select="tei:row[@role='label']">
+
                         <thead>
                                 <tr class="label">
-                                    <xsl:for-each select="tei:cell[@style='right']">                       
+                                    <xsl:for-each select="tei:cell[@style='right']">
                                 <td style="text-align:right">
                                     <xsl:apply-templates/>
-                                </td>                            
+                                </td>
                             </xsl:for-each>
-                                    <xsl:for-each select="tei:cell[@style='center']">                       
+                                    <xsl:for-each select="tei:cell[@style='center']">
                                         <td style="text-align:center">
                                             <xsl:apply-templates/>
-                                        </td>                            
+                                        </td>
                                     </xsl:for-each>
-                                    <xsl:for-each select="tei:cell[@style='left']">                       
+                                    <xsl:for-each select="tei:cell[@style='left']">
                                         <td style="text-align:left">
                                             <xsl:apply-templates/>
-                                        </td>                            
+                                        </td>
                                     </xsl:for-each>
-                                    
+
                                 </tr>
                             </thead>
             </xsl:for-each>
             <tbody>
-                
-               
-               
-                
+
+
+
+
                 <xsl:for-each select="tei:row[following-sibling::tei:milestone[1][@rend='line']]">
                     <tr class="sum">
                         <xsl:for-each select="tei:row">
@@ -453,13 +408,13 @@
                         </xsl:for-each>
                     </tr>
                 </xsl:for-each>
-                
+
                 <xsl:apply-templates select="tei:row[@role='data']"/>
-           
+
             </tbody>
-        </table>        
-    </xsl:template> 
-    
+        </table>
+    </xsl:template>
+
     <xsl:template match="tei:cell">
         <xsl:element name="td">
             <xsl:if test="@style='right'">
@@ -473,7 +428,7 @@
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
-      
+
     <xsl:template match="tei:row[@role='data'][not(local-name(following-sibling::*[1])='milestone')]">
         <tr>
             <xsl:apply-templates/>
@@ -484,9 +439,9 @@
             <xsl:apply-templates/>
         </tr>
     </xsl:template>
-    
-    
-                   
+
+
+
     <!--header-->
     <!-- editor, contributer etc. -->
     <xsl:template match="tei:respStmt">
@@ -602,7 +557,7 @@
         </h2>
     </xsl:template>
 
-   
+
 
     <!-- pysical pages     -->
     <xsl:template match="tei:pb">
@@ -618,7 +573,11 @@
             <xsl:text>/start.htm?distype=imgs&amp;image=</xsl:text>
             <xsl:value-of select="substring-after(substring-after(substring(@facs,2),'_'),'_')"/>
         </xsl:variable>
-        <!--    <div class="pagebreak"> -->
+
+
+
+
+        <!--    <div class="pagebreak"> // liens vers les facsimilés -->
         <xsl:text> || </xsl:text>
 
         <xsl:text> [</xsl:text>
@@ -626,7 +585,7 @@
             <xsl:value-of select="substring(@ed,4)"/>
             <xsl:text>: </xsl:text>
         </xsl:if>
-            
+
         <xsl:choose>
             <xsl:when test="@facs">
                 <a>
@@ -681,9 +640,9 @@
                     </xsl:attribute>
                     <xsl:choose>
                         <xsl:when test="@n">
-                            <xsl:text>[Handschrift: </xsl:text>
+                            <xsl:text>Manuscrit: </xsl:text>
                             <xsl:value-of select="@n"/>
-                            <xsl:text>]</xsl:text>
+                            <xsl:text></xsl:text>
                         </xsl:when>
                         <xsl:when test="@rend">
                             <xsl:value-of select="@rend"/>
@@ -701,9 +660,9 @@
                 <xsl:text>-</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
-           
+
         <xsl:text>] </xsl:text>
-     
+
     </xsl:template>
 
     <xsl:template match="tei:linkGrp">
@@ -734,7 +693,7 @@
 
 
 
-            
+
             <!-- Google Books -->
             <xsl:when test="@type='google_books'">
                 <a>
@@ -771,7 +730,7 @@
                 </a>
             </xsl:otherwise>
         </xsl:choose>
-       
+
     </xsl:template>
 
     <xsl:template match="tei:ptr">
@@ -821,19 +780,19 @@
     </xsl:template>
 
     <!-- footnotes, annotations -->
-    
+
     <!-- Übersetzung als tooltip -->
-           
+
     <xsl:template match="tei:foreign">
         <xsl:if test="following-sibling::*[1] = following-sibling::tei:note[position() = 1 and @type='translation']">
             <a href="#" class="tooltip">
                     <span class="custom help">
                         <xsl:value-of select="following-sibling::*"/>
-                    </span>                 
+                    </span>
                 <xsl:apply-templates/></a>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template match="tei:note[@annotation] | tei:note[@explanation]">
         <a href="#" class="tooltip">
             <span class="custom help">
@@ -842,7 +801,7 @@
             <xsl:apply-templates/>
         </a>
     </xsl:template>
-    
+
     <!--<xsl:when test="@type='annotation'">
         <!-\-  in Text integriert, nur Verweis , Fussnotenabschnitt mit foreach generiert -\->
         <a>
@@ -858,27 +817,27 @@
                 </xsl:attribute>
                 <xsl:attribute name="title"><xsl:copy-of select="normalize-space(.)"/></xsl:attribute>
                 <span style="font-size:9pt;vertical-align:super;color:blue;">
-                    
+
                     <xsl:number level="any" format="a" from="tei:div"
                         count="tei:note[@type ='annotation']"/>
                 </span>
             </a>
         </a>
     </xsl:when>-->
-    
-    
+
+
 
     <xsl:template match="tei:note">
 
         <xsl:param name="caption"/>
-        
-        
-        
+
+
+
         <!--  zwei Typen: entweder Fussnoten am Text- oder Seitenende in einem besonderen Abschnitt oder in den Text integriert -->
         <xsl:choose>
-            
-            
-            
+
+
+
             <xsl:when test="parent::tei:div[@type='footnotes' ]">
                 <!--   Fussnoten am Text- oder Seitenende -->
                 <div class="footnotes">
@@ -914,19 +873,19 @@
                         <xsl:text>fna</xsl:text>
                         <xsl:number level="any" count="tei:note[@type ='footnote']"/>
                     </xsl:attribute>
-                    
+
                     <a>
                         <xsl:attribute name="href">
                             <xsl:text>#fn</xsl:text>
-                            
+
                             <xsl:number level="any" count="tei:note[@type ='footnote']"/>
-                          
+
                         </xsl:attribute>
                         <xsl:attribute name="title"><xsl:copy-of select="normalize-space(.)"/></xsl:attribute>
                         <span style="font-size:9pt;vertical-align:super;color:red;">
-                            
+
                             <xsl:value-of select="$caption"/><xsl:number level="any" count="tei:note[@type ='footnote']"/></span>
-                    
+
                     </a>
                 </a>
             </xsl:when>
@@ -966,11 +925,11 @@
 
     </xsl:template>
 
-   
 
-   
 
-    
+
+
+
 
     <!-- hier erst mal aus    -->
     <xsl:template match="tei:ab"/>
@@ -1173,10 +1132,10 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- hier ggf ausschalten 
+    <!-- hier ggf ausschalten
        <xsl:template match="tei:lb">
            <xsl:if test="not(@rend) or @rend !='trennstrich'">
-               
+
                <xsl:text> </xsl:text>
             </xsl:if>
          </xsl:template>-->
@@ -1205,15 +1164,15 @@
     </xsl:template>-->
 
 	<xsl:template match="tei:p[preceding-sibling::*[1][self::tei:cb]]" />
-	
+
 	<xsl:template match="tei:p[preceding-sibling::*[1][self::tei:cb]]" mode="nachCb">
-		<xsl:call-template name="SegP" />		
+		<xsl:call-template name="SegP" />
 	</xsl:template>
 
     <xsl:template match="tei:p | tei:seg">
 			<xsl:call-template name="SegP" />
     </xsl:template>
-	
+
 	<xsl:template name="SegP">
 		<br/>
 		<xsl:if test="@xml:id[starts-with(.,'org') or starts-with(.,'ue')]">
@@ -1224,12 +1183,12 @@
 				<xsl:text> </xsl:text>
 			</a>
 		</xsl:if>
-		<xsl:apply-templates/>		
+		<xsl:apply-templates/>
 	</xsl:template>
 
     <xsl:template match="exist:match">
-        
-        
+
+
 
         <xsl:variable name="divNo">
             <xsl:number count="tei:div" level="any"/>
@@ -1293,24 +1252,24 @@
         </xsl:if>
     </xsl:template>
 
-    
-    <xsl:template match="tei:term">        
+
+    <xsl:template match="tei:term">
 	    <a>
 	        <xsl:attribute name="id">
 	            <xsl:value-of select="generate-id()"/>
 	        </xsl:attribute>
 	        <xsl:attribute name="href">
-	            
+
 	            <xsl:value-of select="@ref"/>
-	            
+
 	        </xsl:attribute>
 	        <xsl:attribute name="class">
 	            <xsl:text>rs-ref</xsl:text>
-	        </xsl:attribute>                            
+	        </xsl:attribute>
 	        <xsl:apply-templates/>
-	    </a>        
+	    </a>
     </xsl:template>
-    
+
     <xsl:template match="tei:rs">
 
         <xsl:choose>
@@ -1352,7 +1311,7 @@
                                 </xsl:attribute>
                                 <xsl:apply-templates/>
                             </a>
-                        </xsl:when>            -->            
+                        </xsl:when>            -->
                         <xsl:otherwise>
                             <xsl:apply-templates/>
                         </xsl:otherwise>
@@ -1388,18 +1347,18 @@
                 </xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                
+
 
                 <xsl:choose>
                     <xsl:when test="@type='abbreviation'">
                         <a href="#" class="tooltip">
                             <span class="custom info">
                                 <xsl:value-of select="//tei:list/tei:item[@xml:id =substring(current()/@ref,2)]/*[position()=1]"/>
-                            </span>  
+                            </span>
                             <xsl:apply-templates/>
-                        </a>    
+                        </a>
                           </xsl:when>
-                    
+
                     <xsl:when test="@type='symbol'">
                         <a href="#" class="tooltip">
                             <span class="custom info">
@@ -1408,24 +1367,24 @@
                             <xsl:apply-templates/>
                         </a>
                     </xsl:when>
-             
+
                     <xsl:when test="@type='person'">
                         <a>
                             <xsl:attribute name="id">
                                 <xsl:value-of select="generate-id()"/>
                             </xsl:attribute>
                             <xsl:attribute name="href">
-                               
+
                                 <xsl:value-of select="@ref"/>
-                              
+
                             </xsl:attribute>
                             <xsl:attribute name="class">
                                 <xsl:text>rs-ref</xsl:text>
-                            </xsl:attribute>                            
+                            </xsl:attribute>
                             <xsl:apply-templates/>
                         </a>
                     </xsl:when>
-                    
+
                     <xsl:when test="@type='place'">
                         <a>
                             <xsl:attribute name="id">
@@ -1436,11 +1395,11 @@
                             </xsl:attribute>
                             <xsl:attribute name="class">
                                 <xsl:text>rs-ref</xsl:text>
-                            </xsl:attribute>                            
+                            </xsl:attribute>
                             <xsl:apply-templates/>
                         </a>
                     </xsl:when>
-                    
+
                     <xsl:when test="@type='org'">
                         <a>
                             <xsl:attribute name="id">
@@ -1451,11 +1410,11 @@
                             </xsl:attribute>
                             <xsl:attribute name="class">
                                 <xsl:text>rs-ref</xsl:text>
-                            </xsl:attribute>                            
+                            </xsl:attribute>
                             <xsl:apply-templates/>
                         </a>
                     </xsl:when>
-                    
+
                     <xsl:when test="@type='bibl'">
                         <xsl:apply-templates/>
                     </xsl:when>
@@ -1464,7 +1423,7 @@
         </xsl:choose>
 
     </xsl:template>
-    
+
     <xsl:template match="tei:bibl/tei:ref">
         <xsl:choose>
 
@@ -1496,9 +1455,9 @@
     <xsl:template match="rdf:RDF">
         <xsl:value-of select="."/>
     </xsl:template>
-    
+
     <!-- Templateregel zur Erzeugung eines Index-Registers am Seitenende, das via css ausgeblendet wird -->
-     
+
     <xsl:template name="gloss_foot">
     	<xsl:for-each select="//tei:list[@type='gloss']/tei:item">
         <div id="{@xml:id}">
@@ -1512,11 +1471,11 @@
         </div>
     	</xsl:for-each>
     </xsl:template>
-	
+
 	<xsl:template match="tei:item" mode="gloss">
 		<i><xsl:value-of select="."/></i><br />
-	</xsl:template>   
-    
+	</xsl:template>
+
     <xsl:template match="tei:person"/>
     <xsl:template match="tei:person[key('entity-ref', @xml:id)]">
         <xsl:call-template name="format-person"/>
@@ -1528,46 +1487,46 @@
             <xsl:attribute name="class">
                 <xsl:text>rs-ref</xsl:text>
             </xsl:attribute>
-            
-           
+
+
             <!-- TBD -->
-            
+
             <xsl:if test="tei:persName/tei:name">
                 <span><b>
-                    <xsl:value-of select="tei:persName/tei:name/."/></b> 
-                </span><xsl:text> </xsl:text>               
+                    <xsl:value-of select="tei:persName/tei:name/."/></b>
+                </span><xsl:text> </xsl:text>
             </xsl:if>
-            
+
             <xsl:if test="tei:persName/tei:forename">
                 <span class="forename"><b>
-                    <xsl:value-of select="tei:persName/tei:forename/."/></b> 
-                </span><xsl:text> </xsl:text>               
+                    <xsl:value-of select="tei:persName/tei:forename/."/></b>
+                </span><xsl:text> </xsl:text>
             </xsl:if>
-            
+
             <xsl:if test="tei:persName/tei:roleName">
                 <span class="roleName">
-                    <xsl:value-of select="tei:persName/tei:roleName/."/> 
+                    <xsl:value-of select="tei:persName/tei:roleName/."/>
                 </span><xsl:text> </xsl:text>
             </xsl:if>
-            
+
             <xsl:if test="tei:persName/tei:nameLink">
                 <span class="nameLink">
-                    <xsl:value-of select="tei:persName/tei:nameLink/."/> 
+                    <xsl:value-of select="tei:persName/tei:nameLink/."/>
                 </span><xsl:text> </xsl:text>
             </xsl:if>
-            
+
             <xsl:if test="tei:persName/tei:placeName">
                 <span class="placeName">
-                    <xsl:value-of select="tei:persName/tei:placeName/."/> 
+                    <xsl:value-of select="tei:persName/tei:placeName/."/>
                 </span><xsl:text> </xsl:text>
             </xsl:if>
-            
+
             <xsl:if test="tei:persName/tei:surname">
                 <span class="surname">
-                    <xsl:value-of select="tei:persName/tei:surname/."/> 
+                    <xsl:value-of select="tei:persName/tei:surname/."/>
                 </span><xsl:text> </xsl:text>
             </xsl:if>
-            
+
             <xsl:if test="tei:birth">
                 <br/>
                 <xsl:text>geb.: </xsl:text>
@@ -1588,39 +1547,39 @@
                 <span class="note">
                     <xsl:value-of select="tei:note/."/>
                 </span>
-            </xsl:if>            
+            </xsl:if>
         </div>
     </xsl:template>
-    
-       
+
+
     <!-- Wird mit einem tei:org als Kontextknoten aufgerufen und liefert eine für die Anzeige vorbereitete Übersicht zur Person -->
      <xsl:template name="format-org">
                 <div id="{@xml:id}">
                     <xsl:attribute name="class">
                         <xsl:text>rs-ref</xsl:text>
-                    </xsl:attribute>    
+                    </xsl:attribute>
                 </div>
      </xsl:template>
-        
+
     <!-- Templateregel zur Erzeugung eines Index-Registers am Seitenende, das via css ausgeblendet wird -->
-    
+
     <xsl:template match="tei:place"/>
     <xsl:template match="tei:place[key('entity-ref', @xml:id)]">
         <xsl:call-template name="format-place"/>
     </xsl:template>
-    
+
     <!-- Wird mit einem tei:person als Kontextknoten aufgerufen und liefert eine für die Anzeige vorbereitete Übersicht zur Person -->
     <xsl:template name="format-place">
         <div id="{@xml:id}">
             <xsl:attribute name="class">
                 <xsl:text>rs-ref</xsl:text>
             </xsl:attribute>
-            
-           
 
-            
+
+
+
             <!-- TBD -->
-            
+
             <xsl:if test="tei:placeName">
                 <span class="placeName">
                     <xsl:value-of select="tei:placeName/."/>
@@ -1633,10 +1592,10 @@
                             weiterführende Informationen
                      </a>
                     </xsl:if>
-                </span><xsl:text> </xsl:text>               
+                </span><xsl:text> </xsl:text>
             </xsl:if>
-            
-           
+
+
         </div>
     </xsl:template>
 </xsl:stylesheet>

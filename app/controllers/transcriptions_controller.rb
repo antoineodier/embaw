@@ -4,7 +4,7 @@ class TranscriptionsController < ApplicationController
 
   def show
     @transcription = Transcription.find(params[:id])
-    @template = Nokogiri::XSLT(File.read('tei-transcript.xsl'))
+    @template = Nokogiri::XSLT(File.read('tei-transcript-simple.xsl'))
   end
 
   private
