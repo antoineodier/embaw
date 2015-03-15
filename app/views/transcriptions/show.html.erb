@@ -1,7 +1,23 @@
 
-    <% document = Nokogiri::XML(@transcription.xml_content) %>
+<% a = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<?xml-model href=\"http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng\" type=\"application/xml\" schematypens=\"http://relaxng.org/ns/structure/1.0\"?>\n<?xml-model href=\"http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng\" type=\"application/xml\"\n\tschematypens=\"http://purl.oclc.org/dsdl/schematron\"?>\n<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n" %>
+<br>
+<br>
+<%= b = @document.xpath("//xmlns:pb[@n='1v']/preceding::*").to_s %>
+<br>
+<br>
+<% c = "</body>\n  </text>\n</TEI>\n" %>
 
-    <% transformed_document = @template.transform(document) %>
+<br>
+<br>
+
+<%= a+b+c %>
+
+<br>
+<br>
+
+<%= @document %>
+
+    <% transformed_document = @template.transform(Nokogiri::XML(a+b+c)) %>
 
     <%= raw(transformed_document) %>
 
