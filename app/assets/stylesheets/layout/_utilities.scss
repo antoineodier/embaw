@@ -27,7 +27,13 @@
   background: $green;
   color: white;
 }
-.bg-purple {
-  background: $purple;
-  color: white;
+.bg-white {
+  background: white;
+  color: black;
+}
+
+.scan-size {
+  display:block;
+  height: auto;
+  max-width: 100%;
 }
