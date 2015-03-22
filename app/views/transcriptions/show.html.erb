@@ -1,24 +1,18 @@
-<div class = "bg-blue">
-  <div class="row">
-    <div class = "col-md-2" >
-    </div>
-    <div class = "col-md-4" >
-      <div>
-        <%= image_tag("maillefer/maillefer-1r.jpg", :class => "scan-size") %>
-      </div>
-    </div>
-    <div class = "col-md-1" >
-    </div>
-    <div class = "col-md-3" >
-      <div class = "bg-white">
-        <%= raw("<br><i><b>Pagination manuscrit : 1r</b></i>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : 1r</b></i>")}(.*?)#{Regexp.escape("<br><i><b>Pagination manuscrit : 1v</b></i>")}/m, 1]) %>
-      </div>
-    </div>
-    <div class = "col-md-2 pull-right" >
-    </div>
-  </div>
+
+<div class="wrapper_2 viewer">
+  <%= image_tag ("maillefer/maillefer-1r.jpg") %>
 </div>
 
+<%= content_for(:after_js) do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".viewer").zoomer();
+      $(window).on("resize", function(e) {
+        $(".wrapper_2").zoomer("resize");
+      });
+    });
+  </script>
+<% end %>
 
 
 
