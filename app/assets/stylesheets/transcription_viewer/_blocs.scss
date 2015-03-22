@@ -1,0 +1,52 @@
+.wrapper-transcription {
+  border: 5px solid white;
+  background: white;
+  border-radius: 13px;
+  height: 1000px;
+  width: 90%;
+  margin: 10px 10px 10px 20px;
+  padding: 0px 30px 30px 30px;
+  overflow: scroll;
+}
+
+.wrapper-facsimile {
+  border: 5px solid white;
+  background: white;
+  border-radius: 13px;
+  height: 1000px;
+  width: 90%;
+  margin: 10px 20px 10px 10px;
+  overflow: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.page-color {
+    width: auto;
+    height: 2000px;
+    background-color: $blue;
+}
+
+.margin-titre {
+    margin-top: 40px;
+}
+

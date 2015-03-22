@@ -1,6 +1,26 @@
-
-<div class="wrapper_2 viewer">
-  <%= image_tag ("maillefer/maillefer-1r.jpg") %>
+<div class="page-color">
+  <div class="row hauteur">
+    <div class="bg-blue">
+      <div class="col-md-2" >
+      </div>
+      <div class="col-md-4" >
+        <h1 class="text-center margin-titre">Facsimile</h1>
+        <div class="wrapper-facsimile viewer">
+          <div class="bg-white">
+          <%= image_tag ("maillefer/maillefer-1r.jpg") %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" >
+        <h1 class="text-center margin-titre">Transcription</h1>
+        <div class="wrapper-transcription bg-white">
+          <%= raw("<br><i><b>Pagination manuscrit : 1r</b></i>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : 1r</b></i>")}(.*?)#{Regexp.escape("<br><i><b>Pagination manuscrit : 1v</b></i>")}/m, 1]) %>
+        </div>
+      </div>
+      <div class="col-md-2" >
+      </div>
+    </div>
+  </div>
 </div>
 
 <%= content_for(:after_js) do %>
