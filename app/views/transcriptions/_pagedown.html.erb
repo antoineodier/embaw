@@ -1,0 +1,22 @@
+<%= link_to "#", :class => "forme-texte", :id => "page_down" do %>
+   <i class="fa fa-arrow-circle-o-left size-fleche"></i>
+   <%= t(".messages", default: "Page précédente") %>
+<% end %>
+
+<%= content_for(:after_js) do %>
+  <script type="text/javascript">
+    var array_pages = $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/transcriptions/" + "<%= transcription_id %>"
+    });
+    console.log(array_pages)
+    var page_number = 0;
+    array_pages.done(
+      $("#page_down").on("click", function(){
+        page_number += 1;
+        $("#page-transcription").replaceWith(array_pages.responseJSON[page_number]);
+        })
+      )
+  </script>
+<% end %>

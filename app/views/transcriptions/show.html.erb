@@ -6,7 +6,10 @@
       <div class="col-md-2" >
       </div>
       <div class="col-md-4" >
-        <h1 class="text-center margin-titre">Facsimile</h1>
+        <h1 class="text-center margin-titre">
+          <%= render "pagedown", displayed_page: @displayed_page, transcription_id: @transcription.id %>
+          Facsimile
+        </h1>
         <div class="wrapper-facsimile viewer">
           <div class="bg-white">
           <%= image_tag ("maillefer/maillefer-1r.jpg") %>
@@ -15,7 +18,6 @@
       </div>
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
-          <%= render "pagedown" %>
           Transcription
           <%= render "pageup", displayed_page: @displayed_page, transcription_id: @transcription.id %>
         </h1>

@@ -15,7 +15,8 @@
     array_pages.done(
       $("#page_up").on("click", function(){
         page_number += 1;
-        $("#page-transcription").replaceWith(array_pages.responseJSON[page_number]);
+        $("#page-transcription").empty();
+        $("#page-transcription").append(array_pages.responseJSON[page_number]);
         })
       )
   </script>
