@@ -1,1 +1,17 @@
-<p>Page Up</p>
+
+<%= link_to "#", :class => "forme-texte", :id => "page_up" do %>
+   <i class="fa fa-arrow-circle-o-right size-fleche"></i>
+   <%= t(".messages", default: "Page suivante") %>
+<% end %>
+
+<%= content_for(:after_js) do %>
+  <script type="text/javascript">
+  var displayed_page = Number("<%= displayed_page %>");
+    $("#page_up").on("click", function(){
+    displayed_page += 1;
+    $("#page-transcription").text("gégé");
+    });
+  </script>
+<% end %>
+
+

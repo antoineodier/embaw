@@ -15,12 +15,13 @@
       </div>
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
+          <%= render "pagedown" %>
           Transcription
-          <%= render "pageup" %>
+          <%= render "pageup", displayed_page: @displayed_page, transformed_document: @transformed_document %>
         </h1>
         <div class="wrapper-transcription bg-white">
-          <div class="texte-transcription">
-            <%= raw("<br><i><b>Pagination manuscrit : #{@array_page_numbers[@displayed_page]}</b></i><br>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : #{@array_page_numbers[@displayed_page]}</b></i>")}(.*?)#{Regexp.escape("<br><i><b>Pagination manuscrit : #{@array_page_numbers[@displayed_page + 1]}</b></i>")}/m, 1]) %>
+          <div class="texte-transcription" id="page-transcription">
+            <%= display_page(@displayed_page) %>
           </div>
         </div>
       </div>
@@ -44,6 +45,8 @@
     });
   </script>
 <% end %>
+
+
 
 
 
