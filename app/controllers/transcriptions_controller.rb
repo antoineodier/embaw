@@ -14,6 +14,11 @@ class TranscriptionsController < ApplicationController
     response_ajax
   end
 
+  def pages
+    @array_pages_html
+    response_ajax
+  end
+
 end
 
   private
@@ -33,7 +38,7 @@ end
     def response_ajax
       respond_to do |format|
         format.html
-        format.json { render :json => @array_page_numbers }
+        format.json { render :json => @array_pages_html }
       end
     end
 

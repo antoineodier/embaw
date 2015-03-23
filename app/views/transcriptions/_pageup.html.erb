@@ -5,14 +5,19 @@
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript">
-    $.ajax({
+    var array_pages = $.ajax({
       type: "GET",
-      data: {'array_page_numbers' : '<%= @array_page_numbers %>'},
-      url: "/transcriptions/" + "<%= transcription_id %>",
-      success: function(data){
-        console.log(data);
-      }
+      dataType: "json",
+      url: "/transcriptions/" + "<%= transcription_id %>"
     });
+    console.log(array_pages)
+    var page_number = 0;
+    array_pages.done(
+      $("#page_up").on("click", function(){
+        page_number += 1;
+        $("#page-transcription").replaceWith(array_pages.responseJSON[page_number]);
+        })
+      )
   </script>
 <% end %>
 
