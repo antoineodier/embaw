@@ -1,3 +1,5 @@
+<%= raise %>
+
 <div class="page-color">
   <div class="row hauteur">
     <div class="bg-blue">
@@ -12,9 +14,14 @@
         </div>
       </div>
       <div class="col-md-4" >
-        <h1 class="text-center margin-titre">Transcription</h1>
+        <h1 class="text-center margin-titre">
+          Transcription
+          <%= render "pageup" %>
+        </h1>
         <div class="wrapper-transcription bg-white">
-          <%= raw("<br><i><b>Pagination manuscrit : 1r</b></i>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : 1r</b></i>")}(.*?)#{Regexp.escape("<br><i><b>Pagination manuscrit : 1v</b></i>")}/m, 1]) %>
+          <div class="texte-transcription">
+            <%= raw("<br><i><b>Pagination manuscrit : 1r</b></i>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : 1r</b></i>")}(.*?)#{Regexp.escape("<br><i><b>Pagination manuscrit : 1v</b></i>")}/m, 1]) %>
+          </div>
         </div>
       </div>
       <div class="col-md-2" >
