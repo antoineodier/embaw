@@ -17,11 +17,11 @@
         <h1 class="text-center margin-titre">
           <%= render "pagedown" %>
           Transcription
-          <%= render "pageup", displayed_page: @displayed_page, transformed_document: @transformed_document %>
+          <%= render "pageup", displayed_page: @displayed_page, transcription_id: @transcription.id %>
         </h1>
         <div class="wrapper-transcription bg-white">
           <div class="texte-transcription" id="page-transcription">
-            <%= display_page(@displayed_page) %>
+            <%= raw(@first_loaded_page) %>
           </div>
         </div>
       </div>

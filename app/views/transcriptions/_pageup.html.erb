@@ -1,4 +1,3 @@
-
 <%= link_to "#", :class => "forme-texte", :id => "page_up" do %>
    <i class="fa fa-arrow-circle-o-right size-fleche"></i>
    <%= t(".messages", default: "Page suivante") %>
@@ -6,10 +5,13 @@
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript">
-  var displayed_page = Number("<%= displayed_page %>");
-    $("#page_up").on("click", function(){
-    displayed_page += 1;
-    $("#page-transcription").text("gégé");
+    $.ajax({
+      type: "GET",
+      data: {'array_page_numbers' : '<%= @array_page_numbers %>'},
+      url: "/transcriptions/" + "<%= transcription_id %>",
+      success: function(data){
+        console.log(data);
+      }
     });
   </script>
 <% end %>
