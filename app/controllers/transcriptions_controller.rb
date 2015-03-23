@@ -9,7 +9,7 @@ class TranscriptionsController < ApplicationController
     @transformed_document = @template.transform(@document)
     @scan = Scan.find(3)
     @array_page_numbers = array_page_numbers
-
+    @displayed_page = 0
   end
 
   private
