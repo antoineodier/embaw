@@ -12,12 +12,7 @@ class TranscriptionsController < ApplicationController
     @array_pages_html = array_pages_html
     @first_loaded_page = @array_pages_html[0]
     @author_surname = @document.xpath("//xmlns:surname").text.downcase
-    @first_loaded_scan = @author_surname + "/" + @author_surname + "-" + @array_page_numbers[0] + ".jpg"
-    response_ajax
-  end
-
-  def pages
-    @array_pages_html
+    @first_loaded_facsimile = @author_surname + "/" + @author_surname + "-" + @array_page_numbers[0] + ".jpg"
     response_ajax
   end
 

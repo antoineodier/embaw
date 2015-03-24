@@ -1,5 +1,3 @@
-
-
 <div class="page-color">
   <div class="row hauteur">
     <div class="bg-blue">
@@ -7,19 +5,19 @@
       </div>
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
-          <%= render "pagedown", displayed_page: @displayed_page, transcription_id: @transcription.id %>
+          <%= render "pagedown", transcription_id: @transcription.id, author_surname: @author_surname %>
           Facsimile
         </h1>
-        <div class="wrapper-facsimile viewer">
+        <div class="wrapper-facsimile viewer" id="viewer_2">
           <div class="bg-white">
-          <%= image_tag @first_loaded_scan %>
+            <%= image_tag (@first_loaded_facsimile) %>
           </div>
         </div>
       </div>
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
           Transcription
-          <%= render "pageup", displayed_page: @displayed_page, transcription_id: @transcription.id %>
+          <%= render "pageup", transcription_id: @transcription.id, author_surname: @author_surname %>
         </h1>
         <div class="wrapper-transcription bg-white">
           <div class="texte-transcription" id="page-transcription">
@@ -41,7 +39,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $(".viewer").zoomer();
-      $(window).on("resize", function(e) {
+      $(window).on("resize", function() {
         $(".wrapper_2").zoomer("resize");
       });
     });
