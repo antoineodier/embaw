@@ -1,10 +1,13 @@
+
+
 <%= link_to "#", :class => "forme-texte", :id => "page_up" do %>
+   <%= t(".messages", default: "| Page suivante") %>
    <i class="fa fa-arrow-circle-o-right size-fleche"></i>
-   <%= t(".messages", default: "Page suivante") %>
 <% end %>
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript">
+    var author_surname = "<%= author_surname %>";
     var array_pages = $.ajax({
       type: "GET",
       dataType: "json",
@@ -15,20 +18,20 @@
       $("#page_up").on("click", function(){
         page_number += 1;
         $("#page-transcription").empty();
-        $("#page-transcription").append(array_pages.responseJSON[page_number]).slideDown();
+        $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
         $(".viewer").empty();
-        $(".viewer").append("<img src='../assets/maillefer/maillefer-1v.jpg' class='facsimile' width='85%' height='auto'>");
+        $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
         })
       )
     $(window).load(function () {
-var $section = $('section');
-          $section.panzoom('resetDimensions');
-          $section.find('.viewer').panzoom({
-            $zoomIn: $section.find(".zoom-in"),
-            $zoomOut: $section.find(".zoom-out"),
-            $zoomRange: $section.find(".zoom-range"),
-            $reset: $section.find(".reset")
-          });
+      var $section = $('section');
+      $section.panzoom('resetDimensions');
+      $section.find('.viewer').panzoom({
+        $zoomIn: $section.find(".zoom-in"),
+        $zoomOut: $section.find(".zoom-out"),
+        $zoomRange: $section.find(".zoom-range"),
+        $reset: $section.find(".reset")
+      });
     });
   </script>
 <% end %>

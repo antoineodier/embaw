@@ -5,7 +5,7 @@
       </div>
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
-          <%= render "pagedown", transcription_id: @transcription.id, author_surname: @author_surname %>
+          <%= render "pagedown", transcription_id: @transcription.id, author_surname: @author_surname, array_page_numbers: @array_page_numbers %>
           Facsimile
         </h1>
         <section>
@@ -26,7 +26,7 @@
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
           Transcription
-          <%= render "pageup", transcription_id: @transcription.id, author_surname: @author_surname %>
+          <%= render "pageup", transcription_id: @transcription.id, author_surname: @author_surname, array_page_numbers: @array_page_numbers %>
         </h1>
         <div class="wrapper-transcription bg-white">
           <div class="texte-transcription" id="page-transcription">

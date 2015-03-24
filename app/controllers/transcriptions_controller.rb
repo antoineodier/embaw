@@ -27,7 +27,7 @@ end
     def array_page_numbers
       array=[]
       @document.search("pb").each do |element|
-        array << element.first[1]
+        array << element.first[1].to_s
       end
       return array
     end
@@ -35,7 +35,12 @@ end
     def response_ajax
       respond_to do |format|
         format.html
-        format.json { render :json => @array_pages_html }
+        format.json {
+          render :json => {
+            :array_pages_html => @array_pages_html,
+            :array_page_numbers => @array_page_numbers
+          }
+        }
       end
     end
 
