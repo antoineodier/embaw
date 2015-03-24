@@ -1,0 +1,24 @@
+.btn-black {
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  font-size: 30px;
+  padding: 10px;
+  margin: 30 px;
+  opacity: 0.9;
+}
+
+.facsimile {
+    margin-top: 5%;
+    margin-bottom: 10%;
+    margin-left: 7%;
+    margin-right: 7%;
+    border-radius: 8px;
+  }
+
+.buttons-position{
+      position:absolute;
+transition: .5s ease;
+left: 250px;
+    top: 880px;
+}

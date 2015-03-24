@@ -19,18 +19,10 @@
   overflow: hidden;
 }
 
-.clearfix:before,
-.clearfix:after {
-    content:"";
-    display:table;
-}
-.clearfix:after {
-    clear:both;
-}
-
 .row-centered {
     text-align:center;
 }
+
 .col-centered {
     display:inline-block;
     float:none;

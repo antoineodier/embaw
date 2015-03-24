@@ -12,13 +12,12 @@
         <div class="wrapper-facsimile">
           <section>
             <div class="bg-white viewer">
-              <%= image_tag (@first_loaded_facsimile), height: "auto", width: "400" %>
+              <%= image_tag (@first_loaded_facsimile), class: "facsimile", height: "auto", width: "85%" %>
             </div>
-            <div class="buttons text-center">
-                <button class="zoom-in">Zoom In</button>
-                <button class="zoom-out">Zoom Out</button>
-                <input type="range" class="zoom-range">
-                <button class="reset">Reset</button>
+            <div class="text-center buttons-position">
+                <button class="zoom-in btn-black"><i class="fa fa-search-plus"></i></button>
+                <button class="reset btn-black"><i class="fa fa-file-text-o"></i></button>
+                <button class="zoom-out btn-black"><i class="fa fa-search-minus"></i></button>
               </div>
           </section>
         </div>
