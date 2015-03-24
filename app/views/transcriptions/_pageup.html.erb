@@ -16,7 +16,7 @@
       $("#page_up").on("click", function(){
         page_number += 1;
         $("#page-transcription").empty();
-        $("#page-transcription").append(array_pages.responseJSON[page_number]);
+        $("#page-transcription").append(array_pages.responseJSON[page_number]).slideDown();
         })
       )
   </script>

@@ -14,8 +14,9 @@
     var page_number = 0;
     array_pages.done(
       $("#page_down").on("click", function(){
-        page_number += 1;
-        $("#page-transcription").replaceWith(array_pages.responseJSON[page_number]);
+        page_number -= 1;
+        $("#page-transcription").empty();
+        $("#page-transcription").append(array_pages.responseJSON[page_number]).slideDown();
         })
       )
   </script>
