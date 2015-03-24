@@ -17,23 +17,9 @@
         $("#page-transcription").empty();
         $("#page-transcription").append(array_pages.responseJSON[page_number]).slideDown();
         $(".viewer").empty();
-        $("#viewer_2").append("<div class='bg-white'><img src='../assets/maillefer/maillefer-1r.jpg'></div>");
-        $("#viewer_2").zoomer();
-$(window).on("resize", function() {
-        $(".wrapper_2").zoomer("resize");
-      });
+        $(".viewer").append("<img src='../assets/maillefer/maillefer-1r.jpg'>");
         })
       )
   </script>
 <% end %>
 
-<%= content_for(:after_js) do %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("#viewer_2").zoomer();
-      $(window).on("resize", function() {
-        $(".wrapper_2").zoomer("resize");
-      });
-    });
-  </script>
-<% end %>

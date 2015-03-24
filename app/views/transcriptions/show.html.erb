@@ -8,12 +8,20 @@
           <%= render "pagedown", transcription_id: @transcription.id, author_surname: @author_surname %>
           Facsimile
         </h1>
-        <div class="wrapper-facsimile viewer" id="viewer_2">
-          <div class="bg-white">
+        <section>
+        <div class="wrapper-facsimile">
+          <div class="bg-white viewer">
             <%= image_tag (@first_loaded_facsimile) %>
           </div>
+          <div class="buttons">
+            <button class="zoom-in">Zoom In</button>
+            <button class="zoom-out">Zoom Out</button>
+            <input type="range" class="zoom-range">
+            <button class="reset">Reset</button>
+        </div>
         </div>
       </div>
+      </section>
       <div class="col-md-4" >
         <h1 class="text-center margin-titre">
           Transcription
@@ -36,13 +44,16 @@
 </div>
 
 <%= content_for(:after_js) do %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $(".viewer").zoomer();
-      $(window).on("resize", function() {
-        $(".wrapper_2").zoomer("resize");
+  <script>
+    (function() {
+      var $section = $('section').first();
+      $section.find('.viewer').panzoom({
+        $zoomIn: $section.find(".zoom-in"),
+        $zoomOut: $section.find(".zoom-out"),
+        $zoomRange: $section.find(".zoom-range"),
+        $reset: $section.find(".reset")
       });
-    });
+    })();
   </script>
 <% end %>
 
