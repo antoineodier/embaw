@@ -14,6 +14,7 @@
       url: "/transcriptions/" + "<%= transcription_id %>"
     });
     var page_number = 0;
+// click de souris sur page_up
     array_pages.done(
       $("#page_up").on("click", function(){
         page_number += 1;
@@ -23,16 +24,16 @@
         $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
         })
       )
-    $(window).load(function () {
-      var $section = $('section');
-      $section.panzoom('resetDimensions');
-      $section.find('.viewer').panzoom({
-        $zoomIn: $section.find(".zoom-in"),
-        $zoomOut: $section.find(".zoom-out"),
-        $zoomRange: $section.find(".zoom-range"),
-        $reset: $section.find(".reset")
-      });
-    });
+// click de souris sur page_down
+    array_pages.done(
+      $("#page_down").on("click", function(){
+        page_number -= 1;
+        $("#page-transcription").empty();
+        $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
+        $(".viewer").empty();
+        $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+        })
+      )
   </script>
 <% end %>
 
