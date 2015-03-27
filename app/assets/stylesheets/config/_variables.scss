@@ -7,6 +7,11 @@ $base-font: "Open Sans", "Helvetica", "sans-serif";
 $header-font: "Montserrat", "sans-serif";
 $navbar-font: 'Raleway', "sans-serif";
 
+@import url(http://fonts.googleapis.com/css?family=PT+Sans:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,900,700);
+$lateralnav-font: "PT Sans", "cursive";
+$lateralnav_2-font: "Lato", "cursive";
+
 // Local fonts (uncomment following lines)
 // @font-face {
 //   font-family: "Font Name";

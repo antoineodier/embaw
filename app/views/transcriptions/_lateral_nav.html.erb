@@ -1,0 +1,101 @@
+<nav class="mainMenu pullDown">
+  <h3>Menu</h3>
+  <ul class="list-unstyled">
+      <li><a href="#" data-target=""> Texte 1</a></li>
+      <li><a href="#" data-target=""> Texte 2</a></li>
+      <li><a href="#" data-target=""> Texte 3</a></li>
+      <li><a href="#" data-target=""> Texte 4</a></li>
+      <li><a href="#" data-target=""> Texte 5</a></li>
+  </ul>
+</nav>
+
+<!-- cocktail.name.downcase.delete(' ') -->
+
+<script>
+
+  $( document ).ready( function() {
+  // scrollTo('.mainMenu-links')    ;
+  scrollTo();
+  scrollToTop();
+});
+
+function activeLink () {
+  var tab = []; // create the empty tab
+  //$(window).scroll(function(){
+
+//});
+}
+
+function scrollTo () {
+  $('.mainMenu a').click(function(e) {
+      e.preventDefault();
+      $('.mainMenu a').removeClass('active');
+      $(this).addClass('active');
+
+     var distanceTopToSection = $( '#' +  $(this).data('target')).offset().top;
+
+         $( 'body, html' ).animate({scrollTop:distanceTopToSection }, 'slow');
+  });
+}
+
+/*function scrollTo (classLink) {
+   $('a', classLink).on('click', function(e) {
+     e.preventDefault();
+     var distanceTopToSection = $( '#' +  $(this).data('target')).offset().top;
+     $( 'body, html' ).animate({scrollTop:distanceTopToSection }, 'slow');
+  });
+}*/
+
+function scrollToTop () {
+  var backToTop = $('.backToTop');
+  var showBackTotop = $(window).height();
+  backToTop.hide();
+
+  var children = $(".mainMenu li").children(); // find the a children of the list items
+  var tab = []; // create the empty aArray
+  for (var i=0; i < children.length; i++) {
+    var child = children[i];
+    var ahref = $(child).attr('href');
+    tab.push(ahref);
+  } // this for loop fills the aArray with attribute href values
+
+  $(window).scroll( function(){
+    var y = $(window).scrollTop();
+    if( y > showBackTotop  ) {
+      backToTop.fadeIn('slow');
+    } else {
+      backToTop.fadeOut('slow');
+    }
+
+    var windowPos = $(window).scrollTop(); // get the offset of the window from the top of page
+    var windowHeight = $(window).height(); // get the height of the window
+    var docHeight = $(document).height();
+
+    for (var i=0; i < tab.length; i++) {
+        var link = tab[i];
+        var divPos = $(link).offset().top; // get the offset of the div from the top of page
+        var divHeight = $(link).height(); // get the height of the div in question
+        if (windowPos >= divPos && windowPos < (divPos + divHeight)) {
+            $(".mainMenu a[href='#" + link + "']").addClass("active");
+        } else {
+            $(".mainMenu a[href='#" + link + "']").removeClass("active");
+        }
+    }
+
+    if(windowPos + windowHeight == docHeight) {
+        if (!$(".mainMenu li:last-child a").hasClass("active")) {
+            var navActive = $(".active").attr("href");
+            $(".mainMenu a[href='" + navActive + "']").removeClass("active");
+            $(".mainMenu li:last-child a").addClass("active");
+        }
+    }
+  });
+
+  backToTop.click( function(e) {
+    e.preventDefault();
+    $( '.mainMenu li a' ).removeClass( 'active' );
+    $( '.mainMenu li a:first' ).addClass( 'active' );
+    $('body').animate( {scrollTop : 0}, 'slow' );
+  });
+}
+</script>
