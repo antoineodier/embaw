@@ -19,7 +19,7 @@
         <% if user_signed_in? %>
           <li>
             <%= link_to "#" do %>
-              <i class="fa fa-envelope-o"></i> <%= t(".messages", default: "Messages") %>
+              <i class="fa fa-envelope-o margin-home"></i> <%= t(".messages", default: "Messages") %>
             <% end %>
           </li>
           <li class="dropdown">
@@ -46,10 +46,10 @@
             </ul>
           </li>
         <% else %>
-          <li>
+          <li class="margin-sign">
             <%= link_to t(".sign_up", default: "Sign up"), new_user_registration_path %>
           </li>
-          <li>
+          <li class="margin-sign">
             <%= link_to t(".sign_in", default: "Sign in"), new_user_session_path %>
           </li>
         <% end %>
