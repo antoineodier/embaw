@@ -1,16 +1,35 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-      <h2><%= "Connection" %></h2>
-
+<div>
+  <div class="image-registration">
+    <div>
+      <h4 class="form-title">Please sign in or Register</h4>
+    <div>
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <%= f.input :email, required: false, autofocus: true, label: "Adresse email" %>
-          <%= f.input :password, required: false, label: "Mot de passe" %>
-          <%= f.input :remember_me, label: "Mémoriser mes identifiants", as: :boolean if devise_mapping.rememberable? %>
-          <%= f.button :submit, "Connection", class: "btn btn-primary" %>
+    </div>
+    <%= f.input :email, required: false, autofocus: true, label: "Adresse email" %>
+    </div>
+    <div class="form-title text-center" id="box-password">
+      <%= f.input :password, required: false, label: "Mot de passe" %>
+    </div>
+    <div id="box-btn-register">
+      <br><br><br><br><br><br><br>
+      <br>
+      <%= f.button :submit, "Connection", class: "btn btn-primary" %>
+    </div>
+    <div>
+    <%= f.input :remember_me, label: "Mémoriser mes identifiants", as: :boolean if devise_mapping.rememberable? %>
+    </div>
+    <div>
       <% end %>
-
+    </div>
+    <div>
+      <br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br>
+      <br>
       <%= render "devise/shared/links" %>
     </div>
   </div>
+</div>
+<div>
+  <%= image_tag("homepage/neudoerffer_bnf.jpg", class: "img-responsive min-size-img") %>
 </div>
