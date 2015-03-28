@@ -1,4 +1,4 @@
-.form-registration {
+.form-session {
 
   div {
     // border:2px solid #CCCCCC;
@@ -10,34 +10,39 @@
   }
 
   #box-email {
-    margin-top: 10%;
+    margin-top: 8%;
     position: absolute;
-    left: 0%;
+    left: 25%;
     font-size: 3vw;
   }
 
   #box-password {
-    margin-top: 22%;
+    margin-top: 15.5%;
     position: absolute;
-    left: 4.5%;
+    left: 28%;
     font-size: 3vw;
   }
 
   #box-btn-register {
     position: absolute;
-    left: 36%;
-    margin-top: -19%;
+    margin-top: -10%;
+    left: 48.3%;
     font-size: 3vw;
+  }
+
+  #remember-me {
+    position: absolute;
+    margin-top: 28%;
+    left: 47%;
+    font-size: 1.2vw;
+    color: white;
   }
 
   #shared-links {
     border:2px solid #CCCCCC;
     position: absolute;
-    // margin-top: -14%;
-    padding-top: 0px;
-    margin-top: 0px;
-    top: 400%;
-    left: 33%;
+    margin-top: -3%;
+    left: 46%;
     font-size: 1.2vw;
     color: white;
 

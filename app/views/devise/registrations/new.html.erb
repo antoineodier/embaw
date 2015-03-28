@@ -1,12 +1,11 @@
 <div>
-  <div class="image-registration">
+  <div class="form-registration">
     <div>
       <h4 class="form-title">Please register to enter</h4>
     <div>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     </div>
     <div>
-      <br><br><br><br>
       <%= f.error_notification %>
     </div>
     <div class="form-title text-center" id="box-email">
@@ -23,15 +22,16 @@
     <div>
       <% end %>
     </div>
-    <div>
-      <br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br>
-      <br>
+    <div class="text-center" id="shared-links">
       <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
 <div>
   <%= image_tag("homepage/neudoerffer_bnf.jpg", class: "img-responsive min-size-img") %>
+</div
+<div class="bg-white">
+  <h4 class="interligne">
+    <i>Reading and Researching Egodocuments Through a Digital and <strong>European</strong> Approach</i>
+  </h4>
 </div>
