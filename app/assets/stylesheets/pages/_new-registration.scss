@@ -1,24 +1,38 @@
 .image-registration {
   div {
     // border:2px solid #CCCCCC;
+    font-family: $navbar-font;
     background-color:transparent;
     position: absolute;
-    top: 20%;
-    left: 45%;
+    top: 25%;
+    left: 25%;
   }
 }
 
-#box-register {
+#box-email {
+  margin-top: 10%;
   position: absolute;
-  left: -35%;
+  left: 0%;
+  font-size: 3vw;
+}
+
+#box-password {
+  margin-top: 22%;
+  position: absolute;
+  left: 4.5%;
+  font-size: 3vw;
 }
 
 #box-btn-register {
   position: absolute;
-  left: 23%;
+  left: 35%;
+  margin-top: -15%;
+  font-size: 3vw;
 }
 
 .form-title {
   color: white;
-  width: 300px;
+  width: 900px;
+  font-family: $navbar-font;
+  font-size: 5vw;
 }
