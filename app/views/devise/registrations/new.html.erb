@@ -8,15 +8,15 @@
     <div>
       <%= f.error_notification %>
     </div>
-    <div class="form-title text-center" id="box-email">
+    <div>
+    <div class="text-center" id="box-email">
       <%= f.input :email, autofocus: true, label: "Email address" %>
     </div>
-    <div class="form-title text-center" id="box-password">
+    </div>
+    <div class="text-center" id="box-password">
       <%= f.input :password, label: "Password" %>
     </div>
     <div id="box-btn-register">
-      <br><br><br><br><br><br><br>
-      <br>
       <%= f.button :submit, "Register", class: "btn btn-primary" %>
     </div>
     <div>
