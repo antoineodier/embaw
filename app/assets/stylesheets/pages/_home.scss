@@ -9,9 +9,69 @@
     font-size: 8vw;
     text-align: center;
     margin-bottom: 0px;
-      > a:link {
-      color: white;
-    }
+  }
+  a:link {
+  color: white;
+  }
+  a:visited {
+  color: white;
+  }
+  a:hover {
+  animation-duration: 8s;
+  -webkit-animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+  cursor: pointer;
+  letter-spacing: 20px;
+  }
+}
+
+.fadeIn-home{
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+
+  animation-duration: 8s;
+  -webkit-animation-duration: 8s;
+
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
+
+  visibility: visible !important;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0.0;
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  80% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    -webkit-transform: scale(0);
+    opacity: 0.0;
+  }
+  60% {
+    -webkit-transform: scale(1.1);
+  }
+  80% {
+    -webkit-transform: scale(0.9);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    opacity: 1;
   }
 }
 
