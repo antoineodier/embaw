@@ -1,38 +1,42 @@
 <div>
   <div class="image-registration">
-  <div>
+    <div>
       <h4 class="form-title">Please register to enter</h4>
-  <div>
-      <br><%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  </div>
-  <div>
-      <br><br><br><br><%= f.error_notification %>
-  </div>
-  <div class="form-title">
-  <br><br><br><br><br><br><br><%= f.input :email, autofocus: true, label: "Email address" %>
-  </div>
-  <div class="form-title"><br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<%= f.input :password, label: "Password" %>
-</div>
-  <div>
-    <br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br>
-<%= f.button :submit, "Register", class: "btn btn-primary" %>
-</div>
-  <div>
-
+    <div>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    </div>
+    <div>
+      <br><br><br><br>
+      <%= f.error_notification %>
+    </div>
+    <div class="form-title text-center" id="box-register">
+      <br><br><br><br><br><br><br>
+      <%= f.input :email, autofocus: true, label: "Email address" %>
+    </div>
+    <div class="form-title text-center" id="box-register">
+      <br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br>
+      <br><br><br>
+      <%= f.input :password, label: "Password" %>
+    </div>
+    <div id="box-btn-register">
+      <br><br><br><br><br><br><br>
+      <br>
+      <%= f.button :submit, "Register", class: "btn btn-primary" %>
+    </div>
+    <div>
       <% end %>
-      </div>
-  <div>
-    <br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br>
-      <br><%= render "devise/shared/links" %>
+    </div>
+    <div>
+      <br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br>
+      <br>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-  </div>
-  </div>
-  <div>
+</div>
+<div>
   <%= image_tag("homepage/neudoerffer_bnf.jpg", class: "img-responsive min-size-img") %>
-  </div>
 </div>

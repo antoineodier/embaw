@@ -1,10 +1,21 @@
 .image-registration {
   div {
+    // border:2px solid #CCCCCC;
     background-color:transparent;
     position: absolute;
     top: 20%;
     left: 45%;
   }
+}
+
+#box-register {
+  position: absolute;
+  left: -35%;
+}
+
+#box-btn-register {
+  position: absolute;
+  left: 23%;
 }
 
 .form-title {
