@@ -1,16 +1,38 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <h2>Inscription</h2>
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= f.error_notification %>
+<div>
+  <div class="image-registration">
+  <div>
+      <h4 class="form-title">Please register to enter</h4>
+  <div>
+      <br><%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  </div>
+  <div>
+      <br><br><br><br><%= f.error_notification %>
+  </div>
+  <div class="form-title">
+  <br><br><br><br><br><br><br><%= f.input :email, autofocus: true, label: "Email address" %>
+  </div>
+  <div class="form-title"><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<%= f.input :password, label: "Password" %>
+</div>
+  <div>
+    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
+<%= f.button :submit, "Register", class: "btn btn-primary" %>
+</div>
+  <div>
 
-        <%= f.input :email, required: true, autofocus: true, label: "Email address" %>
-        <%= f.input :password, required: true, label: "Password" %>
-        <%= f.button :submit, "Register", class: "btn btn-primary" %>
       <% end %>
-
-      <%= render "devise/shared/links" %>
-    </div>
+      </div>
+  <div>
+    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br>
+      <br><%= render "devise/shared/links" %>
+  </div>
+  </div>
+  </div>
+  <div>
+  <%= image_tag("homepage/neudoerffer_bnf.jpg", class: "img-responsive min-size-img") %>
   </div>
 </div>
