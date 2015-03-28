@@ -12,17 +12,14 @@
   }
   a:link {
   color: white;
+  transition: all 1s;
   }
   a:visited {
   color: white;
   }
   a:hover {
-  animation-duration: 8s;
-  -webkit-animation-duration: 8s;
-  animation-timing-function: ease-in-out;
-  -webkit-animation-timing-function: ease-in-out;
-  cursor: pointer;
-  letter-spacing: 20px;
+  transition: letter-spacing 1.5s ease-out;
+  letter-spacing: 15px;
   }
 }
 
