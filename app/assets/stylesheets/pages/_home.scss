@@ -1,3 +1,7 @@
+html {
+  background-color: white;
+}
+
 .image-homepage {
   h4 {
     font-family: $homepage-font;
@@ -73,7 +77,8 @@
 }
 
 .interligne {
-  font-family: $homepage-font;
+  font-family: $navbar-font;
+  font-size: 1.8vw;
   color: grey;
   text-align: center;
   line-height: 150%;
@@ -81,5 +86,4 @@
   width: 100%;
   padding: 10px;
   margin: 0px;
-  font-size: 1.3vw;
 }
