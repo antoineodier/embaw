@@ -1,0 +1,21 @@
+.image-homepage
+  h4 {
+    font-family: $homepage-font;
+    line-height: 150%;
+    position: absolute;
+    top: 600px;
+    left: 540px;
+    width: 100%;
+    color: white;
+    font-size: 30px;
+  }
+
+.interligne {
+  font-family: $homepage-font;
+  color: black;
+  text-align: center;
+  line-height: 150%;
+  heigth: 200px;
+  width: 100%;
+  padding: 30px;
+}
