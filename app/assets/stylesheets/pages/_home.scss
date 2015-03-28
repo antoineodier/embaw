@@ -2,6 +2,10 @@ html {
   background-color: white;
 }
 
+.min-size-img {
+  min-height: 85%;
+}
+
 .image-homepage {
   h4 {
     font-family: $homepage-font;
