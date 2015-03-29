@@ -6,15 +6,13 @@
     <div>
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     </div>
-    <div class="form-title text-center" id="box-email">
+    <div class="text-center" id="box-email">
       <%= f.input :email, required: false, autofocus: true, label: "Email address" %>
     </div>
-    <div class="form-title text-center" id="box-password">
+    <div class="text-center" id="box-password">
       <%= f.input :password, required: false, label: "Password" %>
     </div>
     <div id="box-btn-register">
-      <br><br><br><br><br><br><br>
-      <br>
       <%= f.button :submit, "Enter", class: "btn btn-primary" %>
     </div>
     <div id="remember-me">
@@ -24,10 +22,6 @@
       <% end %>
     </div>
     <div class="text-center" id="shared-links">
-      <br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br>
-      <br><br><br><br><br><br><br>
-      <br>
       <%= render "devise/shared/links" %>
     </div>
   </div>
