@@ -73,12 +73,17 @@ $navbar-profile-border-width: 2px;
     background-color: transparent;
   }
 
-  .navbar-brand,
-  .navbar-brand:hover {
+  .navbar-brand {
     outline: none;
     color: $navbar-color;
     padding-top: $navbar-vertical-padding;
     padding-bottom: $navbar-vertical-padding;
+  }
+
+  #color-link {
+    > a:hover {
+    color: $yellow;
+    }
   }
 
   .navbar-nav > li > a.btn {
