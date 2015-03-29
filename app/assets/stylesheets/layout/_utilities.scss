@@ -1,6 +1,9 @@
-// pour devise = supprimer les messages flash vides
-
+// pour devise = supprimer les messages d'alerte vides et en fait tous les messages d'alerte
 .flash.alert:empty {
+  display: none;
+  background: transparent;
+}
+.alert {
   display: none;
 }
 
