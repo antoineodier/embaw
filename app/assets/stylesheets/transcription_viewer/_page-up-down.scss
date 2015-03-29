@@ -1,0 +1,14 @@
+.page-up-down {
+  font-size: 1.2vw;
+  a:link {
+      color: white;
+      transition: all 1s;
+    }
+    a:visited {
+      color: white;
+    }
+    a:hover {
+      transition: letter-spacing 1s ease-out;
+      letter-spacing: 1px;
+    }
+}

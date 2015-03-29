@@ -4,7 +4,7 @@
       <div class="col-md-2" >
       </div>
       <div class="col-md-4" >
-        <h1 class="text-center margin-titre">
+        <h1 class="text-center margin-titre page-up-down">
           <%= render "pagedown", transcription_id: @transcription.id, author_surname: @author_surname, array_page_numbers: @array_page_numbers %>
           Facsimile
         </h1>
@@ -24,7 +24,7 @@
       </div>
       </section>
       <div class="col-md-4" >
-        <h1 class="text-center margin-titre">
+        <h1 class="text-center margin-titre page-up-down">
           Transcription
           <%= render "pageup", transcription_id: @transcription.id, author_surname: @author_surname, array_page_numbers: @array_page_numbers %>
         </h1>
