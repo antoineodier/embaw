@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(resource)
+    transcription_path(1)
+  end
+
   def user_not_authorized
     flash[:error] = I18n.t('controllers.application.user_not_authorized', default: "You can't access this page.")
     redirect_to(root_path)

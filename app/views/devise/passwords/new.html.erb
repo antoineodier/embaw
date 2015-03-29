@@ -1,12 +1,40 @@
-<h2><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h2>
-
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-  <div><%= f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions") %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<div>
+  <div class="form-forgot-password">
+    <div>
+      <h2 class="form-title"><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h2>
+    </div>
+    <div>
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+    </div>
+    <!-- <div class="text-center">
+      <div class="error-messages list-unstyled">
+        <%= devise_error_messages! %>
+      </div>
+    </div> -->
+    <div class="text-center" id="box-email">
+        <%= f.label :email, "Email address" %>
+        <br />
+        <%= f.email_field :email, class: "box-forgot-email" %>
+    </div>
+    <div class="text-center" id="box-btn-send">
+      <div>
+        <%= f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), :class => "btn btn-primary" %>
+          <!-- btn-color = rajouter la classe ici pour modifier la couleur du bouton-->
+      </div>
+    </div>
+    <div>
+      <% end %>
+    </div>
+    <div class="text-center" id="shared-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
+<div>
+  <%= image_tag("homepage/neudoerffer_bnf.jpg", class: "img-responsive min-size-img") %>
+</div>
+<div class="bg-white">
+  <h4 class="interligne">
+    <i>Reading and Researching Egodocuments Through a Digital and <strong>European</strong> Approach</i>
+  </h4>
+</div>

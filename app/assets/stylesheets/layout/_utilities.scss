@@ -1,8 +1,9 @@
-/* -------------------------------------
- * Utilities classes
- * These are examples of utilities classes
- * Feel free to change them and create your own
- * ------------------------------------- */
+// pour devise = supprimer les messages flash vides
+
+.flash.alert:empty {
+  display: none;
+}
+
 .padded {
   padding-top: 8em;
   padding-bottom: 8em;
