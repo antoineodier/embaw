@@ -12,16 +12,18 @@
         <% if user_signed_in? %>
           <li>
             <%= link_to "#" do %>
-              <i class="fa fa-envelope-o margin-home"></i> <%= t(".messages", default: "Messages") %>
+              <i class="fa fa-envelope-o margin-message"></i> <%= t(".messages", default: "Messages") %>
             <% end %>
           </li>
-          <li class="dropdown">
+          <li class="dropdown margin-message">
             <%= link_to "#", {class: "dropdown-toggle", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"} do %>
-              <%= image_tag "http://placehold.it/30x30", class: "img-avatar" %>
+              <i class="fa fa-user"></i>
+              <!-- pour la vraie photo de profil -->
+              <!--  <%= image_tag "divers/profile-pic.jpg", class: "img-avatar" %> -->
               Profile <span class="caret"></span>
             <% end %>
             <ul class="dropdown-menu" role="menu">
-              <li>
+<!--               <li>
                 <%= link_to "#" do %>
                   <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
                 <% end %>
@@ -30,7 +32,7 @@
                 <%= link_to "#" do %>
                   <i class="fa fa-home"></i>  <%= t ".profile", default: "Flat" %>
                 <% end %>
-              </li>
+              </li> -->
               <li>
                 <%= link_to destroy_user_session_path, method: :delete do %>
                   <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Sign out" %>
