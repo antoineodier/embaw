@@ -1,6 +1,6 @@
 class Transcription < ActiveRecord::Base
-  has_many :scans
-  validates :path_to_xml_file, uniqueness: true, presence: true
+  # has_many :scans
+  # validates :path_to_xml_file, uniqueness: true, presence: true
 
   def xml_content_normalized
     client = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
