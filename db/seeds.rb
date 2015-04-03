@@ -8,10 +8,10 @@ Transcription.create(
 
 # 2/Isaac Bostaquet
 Transcription.create(
-  path_to_diplomatic_transcription: "isaac_bostaquet_registre/diplomatic_transcription-isaac_bostaquet.xml",
-  path_to_normalized_transcription: "isaac_bostaquet_registre/normalized_transcription-isaac_bostaquet.xml"
-  path_to_diplomatic_transformation: "isaac_bostaquet_registre/diplomatic_transformation-isaac_bostaquet.xsl",
-  path_to_normalized_transformation: "isaac_bostaquet_registre/normalized_transformation-isaac_bostaquet.xsl"
+  path_to_diplomatic_transcription: "isaac_dumont_registre/diplomatic_transcription-isaac_dumont.xml",
+  path_to_normalized_transcription: "isaac_dumont_registre/normalized_transcription-isaac_dumont.xml"
+  path_to_diplomatic_transformation: "isaac_dumont_registre/diplomatic_transformation-isaac_dumont.xsl",
+  path_to_normalized_transformation: "isaac_dumont_registre/normalized_transformation-isaac_dumont.xsl"
 )
 
 # 3/Glikl Hameln
