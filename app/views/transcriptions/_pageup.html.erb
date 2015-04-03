@@ -7,7 +7,7 @@
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript">
-    var author_surname = "<%= author_surname %>";
+    var scans_folder_id = "<%= scans_folder_id %>";
     var array_pages = $.ajax({
       type: "GET",
       dataType: "json",
@@ -22,7 +22,7 @@
           $("#page-transcription").empty();
           $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
           $(".viewer").empty();
-          $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+          $(".viewer").append("<img src='../assets/manuscripts_scans/" + scans_folder_id + "/" + scans_folder_id + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
           }
         })
       )
@@ -34,7 +34,7 @@
           $("#page-transcription").empty();
           $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
           $(".viewer").empty();
-          $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+          $(".viewer").append("<img src='../assets/manuscripts_scans/" + scans_folder_id + "/" + scans_folder_id + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
           }
         })
       )

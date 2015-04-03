@@ -20,7 +20,8 @@ class TranscriptionsController < ApplicationController
     @scan = Scan.find(3)
     @array_page_numbers = array_page_numbers
     @first_loaded_page = @array_pages_html[0]
-    @first_loaded_facsimile = @author_surname + "/" + @author_surname + "-" + @array_page_numbers[0] + ".jpg"
+    @scans_folder_id = scans_folder_id
+    @first_loaded_facsimile = "manuscripts_scans/" + @scans_folder_id + "/" + @scans_folder_id + "-" + @array_page_numbers[0] + ".jpg"
     response_ajax
   end
 
@@ -70,6 +71,10 @@ end
 
     def display_last_page(page_number)
       "<br><i><b>[Pagination manuscrit : #{@array_page_numbers[page_number.to_i]}]</b></i><br>" + @transformed_document.to_s[/#{Regexp.escape("<br><i><b>Pagination manuscrit : #{@array_page_numbers[page_number.to_i]}</b></i>")}(.*?)/m, 1]
+    end
+
+    def scans_folder_id
+      @document.xpath("//xmlns:firstname").text.downcase + "_" + @document.xpath("//xmlns:surname").text.downcase + "_" + @document.xpath("//xmlns:title").text.downcase
     end
 
 
