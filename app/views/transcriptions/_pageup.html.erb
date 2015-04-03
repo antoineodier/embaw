@@ -17,11 +17,13 @@
 // click de souris sur page_up
     array_pages.done(
       $("#page_up").on("click", function(){
-        page_number += 1;
-        $("#page-transcription").empty();
-        $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
-        $(".viewer").empty();
-        $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+        if( page_number + 1 < array_pages.responseJSON.array_pages_html.length ) {
+          page_number += 1;
+          $("#page-transcription").empty();
+          $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
+          $(".viewer").empty();
+          $(".viewer").append("<img src='../assets/" + author_surname + "/" + author_surname + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+          }
         })
       )
 // click de souris sur page_down
@@ -36,4 +38,3 @@
       )
   </script>
 <% end %>
-
