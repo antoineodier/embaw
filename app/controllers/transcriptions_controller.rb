@@ -65,7 +65,8 @@ end
         format.json {
           render :json => {
             :array_pages_html => @array_pages_html,
-            :array_page_numbers => @array_page_numbers
+            :array_page_numbers => @array_page_numbers,
+            :array_pages_xml_normalized => @array_pages_xml_normalized
           }
         }
       end
