@@ -5,13 +5,19 @@ class TranscriptionsController < ApplicationController
   def show
     #sélection de la transcription
     @transcription = Transcription.find(params[:id])
-    #métadonnées tirées du header (communes aux 2 transcriptions)
-    # @author_surname = @document.xpath("//xmlns:surname").text.downcase
 
     # normalized_transcription
     @document = Nokogiri::XML(@transcription.xml_content_normalized)
     @template = Nokogiri::XSLT(File.read('tei-transcript-simple.xsl'))
     @transformed_document = @template.transform(@document).css("body").to_s
+
+    #métadonnées tirées du header (communes aux 2 transcriptions)
+    @author_surname = @document.css("author//surname").text
+    @text_title = @document.css("titleStmt//title").text
+    @repository_name = @document.css("msIdentifier//repository").text
+    @repository_place = @document.css("msIdentifier//settlement").text
+    @repository_logo = "logos-bibliotheques/" + @repository_name.downcase.tr(" ", "_") + "_" + @repository_place.downcase + ".jpg"
+    @catalogue_link = @document.css("altIdentifier//idno").text
 
     # diplomatic_transcription
 
@@ -73,7 +79,7 @@ end
     end
 
     def scans_folder_id
-      @document.css("author//forename").text.downcase + "_" + @document.css("author//surname").text.downcase + "_" + @document.css("titleStmt//title").text.downcase
+      @document.css("author//forename").text.downcase + "_" + @author_surname.downcase + "_" + @text_title.downcase
     end
 
 
