@@ -40,6 +40,7 @@
       <b>
         <xsl:text>Page range: </xsl:text>
         <xsl:value-of select="@n"/>
+        <!-- rajouter 1 type="f. ou p." sur le 1er pb -->
       </b>
     </i>
   </xsl:template>
