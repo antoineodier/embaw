@@ -6,19 +6,18 @@ class TranscriptionsController < ApplicationController
     #sélection de la transcription
     @transcription = Transcription.find(params[:id])
     #métadonnées tirées du header (communes aux 2 transcriptions)
-    @author_surname = @document.xpath("//xmlns:surname").text.downcase
+    # @author_surname = @document.xpath("//xmlns:surname").text.downcase
 
     # normalized_transcription
     @document = Nokogiri::XML(@transcription.xml_content_normalized)
     @template = Nokogiri::XSLT(File.read('tei-transcript-simple.xsl'))
     @transformed_document = @template.transform(@document).css("body").to_s
-    @array_pages_html = array_pages_html
 
     # diplomatic_transcription
 
     # système de chargement des pages et scans
-    @scan = Scan.find(3)
     @array_page_numbers = array_page_numbers
+    @array_pages_html = array_pages_html
     @first_loaded_page = @array_pages_html[0]
     @scans_folder_id = scans_folder_id
     @first_loaded_facsimile = "manuscripts_scans/" + @scans_folder_id + "/" + @scans_folder_id + "-" + @array_page_numbers[0] + ".jpg"
@@ -74,7 +73,7 @@ end
     end
 
     def scans_folder_id
-      @document.xpath("//xmlns:firstname").text.downcase + "_" + @document.xpath("//xmlns:surname").text.downcase + "_" + @document.xpath("//xmlns:title").text.downcase
+      @document.css("author//forename").text.downcase + "_" + @document.css("author//surname").text.downcase + "_" + @document.css("titleStmt//title").text.downcase
     end
 
 
