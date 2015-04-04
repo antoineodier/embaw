@@ -26,30 +26,18 @@
   </ul>
 </nav>
 
-<style type="text/css" media="screen">
-
-
-    #editor {
-        height: 25vw;
-        width: auto;
-        border-radius: 7px;
-    }
-  </style>
-
 <%= content_for(:after_js) do %>
   <script>
   $("#correction-ace").on("click", function(){
           $("#page-transcription").empty();
-          $("#page-transcription").append("<pre id='page_ace_editor'></pre>");
-          $("#page_ace_editor").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
-          var editor = ace.edit("page_ace_editor");
+          $("#page-transcription").append("<pre id='page-ace-editor'></pre>");
+          $("#page-ace-editor").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
+          var editor = ace.edit("page-ace-editor");
           editor.setTheme("ace/theme/solarized_light");
           editor.getSession().setMode("ace/mode/html");
         })
 </script>
 <% end %>
-
-
 
 <script>
 
