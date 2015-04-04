@@ -38,7 +38,7 @@
     <br/>
     <i>
       <b>
-        <xsl:text>Pagination manuscrit : </xsl:text>
+        <xsl:text>Page range: </xsl:text>
         <xsl:value-of select="@n"/>
       </b>
     </i>
