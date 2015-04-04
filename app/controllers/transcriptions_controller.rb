@@ -28,6 +28,15 @@ class TranscriptionsController < ApplicationController
     @scans_folder_id = scans_folder_id
     @first_loaded_facsimile = "manuscripts_scans/" + @scans_folder_id + "/" + @scans_folder_id + "-" + @array_page_numbers[0] + ".jpg"
     response_ajax
+
+    # sélection de toutes les transcriptions pour la navbar latérale
+    array_transcriptions_1 = Transcription.all
+    array_transcriptions = []
+    array_transcriptions_1.each do |text|
+        array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
+        # -->il faut transférer uniquement les titres + paths pour la navbar
+      end
+    raise
   end
 
 end
@@ -39,7 +48,7 @@ end
     end
 
     def array_page_numbers
-      array=[]
+      array = []
       @document.search("pb").each do |element|
         array << element.first[1].to_s
       end
