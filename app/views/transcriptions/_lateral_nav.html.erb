@@ -27,20 +27,22 @@
 </nav>
 
 <%= content_for(:after_js) do %>
-  <script>
-    // array_pages.done(
+  <script type="text/javascript" charset="utf-8">
+    array_pages.done(
       $("#correction-ace").on("click", function(){
         $("#page-transcription").empty();
-        $("#page-transcription").append("<pre id='page-ace-editor'></pre>");
-        $("#page-ace-editor").append(array_pages.responseJSON.array_pages_xml_normalized[page_number]).slideDown();
+        $("#page-transcription").append("<div id='page-ace-editor'></div>");
+        $("#page-ace-editor").text(array_pages.responseJSON.array_pages_xml_normalized[page_number]);
         var editor = ace.edit("page-ace-editor");
         editor.setTheme("ace/theme/solarized_light");
         editor.getSession().setMode("ace/mode/xml");
+        editor.getSession().setUseWrapMode(true);
       })
-    // )
+    )
   </script>
 <% end %>
 
+<%= content_for(:after_js) do %>
 <script>
 
   $( document ).ready( function() {
@@ -129,3 +131,4 @@ function scrollToTop () {
   });
 }
 </script>
+<% end %>

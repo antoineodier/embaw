@@ -40,7 +40,6 @@ class TranscriptionsController < ApplicationController
     #     array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
     #     # -->il faut transférer uniquement les titres + paths pour la navbar
     #   end
-    raise
 
   end
 
