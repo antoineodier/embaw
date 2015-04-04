@@ -7,6 +7,8 @@ class TranscriptionsController < ApplicationController
     @transcription = Transcription.find(params[:id])
 
     # normalized_transcription
+    @fichier_xml_normalized = @transcription.xml_content_normalized
+    @volume_xml_normalized = @fichier_xml_normalized[/#{Regexp.escape("<div type=\"volume\">\n")}(.*?)#{Regexp.escape("</div>")}/m, 1]
     @document = Nokogiri::XML(@transcription.xml_content_normalized)
     @template = Nokogiri::XSLT(File.read('tei-transcript-simple.xsl'))
     @transformed_document = @template.transform(@document).css("body").to_s
@@ -28,6 +30,7 @@ class TranscriptionsController < ApplicationController
     @first_loaded_page = @array_pages_html[0]
     @scans_folder_id = scans_folder_id
     @first_loaded_facsimile = "manuscripts_scans/" + @scans_folder_id + "/" + @scans_folder_id + "-" + @array_page_numbers[0] + ".jpg"
+    @array_pages_xml_normalized = array_pages_xml_normalized
     response_ajax
 
     # sélection de toutes les transcriptions pour la navbar latérale
@@ -37,7 +40,7 @@ class TranscriptionsController < ApplicationController
     #     array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
     #     # -->il faut transférer uniquement les titres + paths pour la navbar
     #   end
-    # raise
+    raise
   end
 
 end
@@ -66,6 +69,26 @@ end
           }
         }
       end
+    end
+
+    def array_pages_xml_normalized
+      array_pages_xml_contenu = []
+      @array_page_numbers.each_with_index do |page_number, index|
+        if page_number != @array_page_numbers.last
+          array_pages_xml_contenu << display_page_xml(index)
+        elsif page_number == @array_page_numbers.last
+          array_pages_xml_contenu << display_last_page_xml(index)
+        end
+      end
+      return array_pages_xml_contenu
+    end
+
+    def display_page_xml(page_number)
+      "<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n" + @volume_xml_normalized[/#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n")}(.*?)#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i + 1]}\"/>\n")}/m, 1]
+    end
+
+    def display_last_page_xml(page_number)
+      "<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n" + @volume_xml_normalized[/#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n")}(.*?)/m, 1]
     end
 
     def array_pages_html
