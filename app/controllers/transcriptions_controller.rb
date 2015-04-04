@@ -41,6 +41,7 @@ class TranscriptionsController < ApplicationController
     #     # -->il faut transférer uniquement les titres + paths pour la navbar
     #   end
     raise
+
   end
 
 end

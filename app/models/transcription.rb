@@ -5,14 +5,14 @@ class Transcription < ActiveRecord::Base
   def xml_content_normalized
     client = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
     content = client.contents('antoineodier/egodocuments-transcriptions', path: self.path_to_normalized_transcription).content
-    text = Base64.decode64(content)
+    text = Base64.decode64(content).force_encoding('UTF-8').encode
     return text
   end
 
   def xml_content_diplomatic
     client = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
     content = client.contents('antoineodier/egodocuments-transcriptions', path: self.path_to_diplomatic_transcription).content
-    text = Base64.decode64(content)
+    text = Base64.decode64(content).force_encoding('UTF-8').encode
     return text
   end
 
