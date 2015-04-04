@@ -39,13 +39,12 @@
 <%= content_for(:after_js) do %>
   <script>
   $("#correction-ace").on("click", function(){
-          // $("#page-transcription").empty();
-          var editor = ace.edit("page-transcription");
+          $("#page-transcription").empty();
+          $("#page-transcription").append("<pre id='page_ace_editor'></pre>");
+          $("#page_ace_editor").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
+          var editor = ace.edit("page_ace_editor");
           editor.setTheme("ace/theme/solarized_light");
           editor.getSession().setMode("ace/mode/html");
-          // $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
-          // $(".viewer").empty();
-          // $(".viewer").append("<img src='../assets/manuscripts_scans/" + scans_folder_id + "/" + scans_folder_id + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
         })
 </script>
 <% end %>
