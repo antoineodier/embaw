@@ -21,12 +21,36 @@
   </ul>
   <h3 class="text-center">Contribute</h3>
   <ul class="list-unstyled">
-    <li><a href="#" data-target="">Correction</a></li>
+    <li><a href="#" data-target="" id="correction-ace">Correction</a></li>
     <li><a href="#" data-target="">Submit</a></li>
   </ul>
 </nav>
 
-<!-- cocktail.name.downcase.delete(' ') -->
+<style type="text/css" media="screen">
+
+
+    #editor {
+        height: 25vw;
+        width: auto;
+        border-radius: 7px;
+    }
+  </style>
+
+<%= content_for(:after_js) do %>
+  <script>
+  $("#correction-ace").on("click", function(){
+          // $("#page-transcription").empty();
+          var editor = ace.edit("page-transcription");
+          editor.setTheme("ace/theme/solarized_light");
+          editor.getSession().setMode("ace/mode/html");
+          // $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
+          // $(".viewer").empty();
+          // $(".viewer").append("<img src='../assets/manuscripts_scans/" + scans_folder_id + "/" + scans_folder_id + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+        })
+</script>
+<% end %>
+
+
 
 <script>
 

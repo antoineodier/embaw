@@ -15,8 +15,9 @@ class TranscriptionsController < ApplicationController
     @author_surname = @document.css("author//surname").text
     @text_title = @document.css("titleStmt//title").text
     @repository_name = @document.css("msIdentifier//repository").text
-    @repository_place = @document.css("msIdentifier//settlement").text
-    @repository_logo = "logos-bibliotheques/" + @repository_name.downcase.tr(" ", "_") + "_" + @repository_place.downcase + ".jpg"
+    @repository_place = @document.css("msIdentifier//settlement/rs[@type='place']").text
+    @repository_country = @document.css("msIdentifier//settlement/rs[@type='country']").text
+    @repository_logo = "logos-bibliotheques/" + @repository_name.parameterize.underscore + "_" + @repository_place.downcase + ".jpg"
     @catalogue_link = @document.css("altIdentifier//idno").text
 
     # diplomatic_transcription
