@@ -30,13 +30,13 @@ class TranscriptionsController < ApplicationController
     response_ajax
 
     # sélection de toutes les transcriptions pour la navbar latérale
-    array_transcriptions_1 = Transcription.all
-    array_transcriptions = []
-    array_transcriptions_1.each do |text|
-        array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
-        # -->il faut transférer uniquement les titres + paths pour la navbar
-      end
-    raise
+    # array_transcriptions_1 = Transcription.all
+    # array_transcriptions = []
+    # array_transcriptions_1.each do |text|
+    #     array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
+    #     # -->il faut transférer uniquement les titres + paths pour la navbar
+    #   end
+    # raise
   end
 
 end
