@@ -45,6 +45,7 @@ class TranscriptionsController < ApplicationController
 
   def submit_correction
     response_ajax_correction
+
   end
 
 end
