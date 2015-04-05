@@ -20,7 +20,7 @@
     <li><a href="#" data-target="">Bibliography</a></li>
   </ul>
   <h3 class="text-center">Contribute</h3>
-  <ul class="list-unstyled">
+  <ul class="list-unstyled" id="list-contribute">
     <li><a href="#" data-target="" id="correction-ace">Correction</a></li>
     <li><a href="#" data-target="">Submit</a></li>
   </ul>
@@ -28,17 +28,22 @@
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript" charset="utf-8">
-    array_pages.done(
-      $("#correction-ace").on("click", function(){
+    // array_pages.done(
+      $("#correction-ace").one("click", function(){
+        $("#list-contribute").append("<li><a href='#' data-target='' id='exit-correction'>Exit</a></li>");
+        $(".wrapper-transcription").removeClass("wrapper-transcription").addClass("wrapper-correction");
+        $(".texte-transcription").removeClass("texte-transcription").addClass("texte-correction");
         $("#page-transcription").empty();
         $("#page-transcription").append("<div id='page-ace-editor'></div>");
         $("#page-ace-editor").text(array_pages.responseJSON.array_pages_xml_normalized[page_number]);
         var editor = ace.edit("page-ace-editor");
         editor.setTheme("ace/theme/solarized_light");
         editor.getSession().setMode("ace/mode/xml");
-        editor.getSession().setUseWrapMode(true);
+        // editor.getSession().setUseWrapMode(true);
       })
-    )
+      $("#exit-correction").one("click", function(){
+        })
+    // )
   </script>
 <% end %>
 
