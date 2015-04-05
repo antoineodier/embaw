@@ -28,22 +28,31 @@
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript" charset="utf-8">
-    // array_pages.done(
-      $("#correction-ace").one("click", function(){
-        $("#list-contribute").append("<li><a href='#' data-target='' id='exit-correction'>Exit</a></li>");
-        $(".wrapper-transcription").removeClass("wrapper-transcription").addClass("wrapper-correction");
-        $(".texte-transcription").removeClass("texte-transcription").addClass("texte-correction");
-        $("#page-transcription").empty();
-        $("#page-transcription").append("<div id='page-ace-editor'></div>");
-        $("#page-ace-editor").text(array_pages.responseJSON.array_pages_xml_normalized[page_number]);
-        var editor = ace.edit("page-ace-editor");
-        editor.setTheme("ace/theme/solarized_light");
-        editor.getSession().setMode("ace/mode/xml");
-        // editor.getSession().setUseWrapMode(true);
+    var correction_click = 0;
+      $("#correction-ace").on("click", function(){
+        if( correction_click == 0 ) {
+          console.log("gérard")
+          $("#list-contribute").append("<li id='li-exit-correction'><a href='#' data-target='' id='exit-correction'>Exit</a></li>");
+          $(".wrapper-transcription").removeClass("wrapper-transcription").addClass("wrapper-correction");
+          $(".texte-transcription").removeClass("texte-transcription").addClass("texte-correction");
+          $("#page-transcription").empty();
+          $("#page-transcription").append("<div id='page-ace-editor'></div>");
+          $("#page-ace-editor").text(array_pages.responseJSON.array_pages_xml_normalized[page_number]);
+          var editor = ace.edit("page-ace-editor");
+          editor.setTheme("ace/theme/solarized_light");
+          editor.getSession().setMode("ace/mode/xml");
+          correction_click += 1;
+          // sortie en cliquant sur exit
+          $("#li-exit-correction").on("click", function(){
+            correction_click -= 1;
+            $("#li-exit-correction").remove();
+            $("#page-transcription").empty();
+            $(".wrapper-correction").removeClass("wrapper-correction").addClass("wrapper-transcription");
+            $(".texte-correction").removeClass("texte-correction").addClass("texte-transcription");
+            $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]);
+          })
+        }
       })
-      $("#exit-correction").one("click", function(){
-        })
-    // )
   </script>
 <% end %>
 
