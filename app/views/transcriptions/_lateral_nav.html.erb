@@ -31,7 +31,7 @@
     var correction_click = 0;
       $("#correction-ace").on("click", function(){
         if( correction_click == 0 ) {
-          console.log("gérard")
+          $("#transcription-header").text("CODE");
           $("#list-contribute").append("<li id='li-exit-correction'><a href='#' data-target='' id='exit-correction'>Exit</a></li>");
           $(".wrapper-transcription").removeClass("wrapper-transcription").addClass("wrapper-correction");
           $(".texte-transcription").removeClass("texte-transcription").addClass("texte-correction");
@@ -45,6 +45,7 @@
           // sortie en cliquant sur exit
           $("#li-exit-correction").on("click", function(){
             correction_click -= 1;
+            $("#transcription-header").empty();
             $("#li-exit-correction").remove();
             $("#page-transcription").empty();
             $(".wrapper-correction").removeClass("wrapper-correction").addClass("wrapper-transcription");
