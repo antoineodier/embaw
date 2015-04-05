@@ -44,12 +44,21 @@ class TranscriptionsController < ApplicationController
   end
 
   def submit_correction
-    "Hello"
+    response_ajax_correction
   end
 
 end
 
   private
+
+  # méthodes de la correction sur github
+
+  def response_ajax_correction
+    @data_correction = params[:data_correction]
+    render :json => @data_correction
+  end
+
+  # méthodes du show
 
     def transcription_params
       params.require(:transcription, :template).permit(:path_to_xml_file)
