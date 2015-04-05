@@ -44,7 +44,7 @@ class TranscriptionsController < ApplicationController
   end
 
   def submit_correction
-
+    Hello
   end
 
 end

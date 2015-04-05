@@ -50,7 +50,13 @@
           });
           // envoi des données en cliquant sur 'submit'
           $("#li-submit-correction").on("click", function(){
-
+            // envoi du contenu de la correction en ajax
+            request_ajax_correction = $.ajax({
+              type: "POST",
+              url: "/transcriptions/submit_correction",
+              data: {page_corrected_content: page_corrected, manuscript_page: page_number},
+              dataType: "json"
+            })
             // retour à l'affichage de la transcription (copie de 'exit')
             correction_click -= 1;
             $("#transcription-header").empty();
