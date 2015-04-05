@@ -22,13 +22,16 @@
   <h3 class="text-center">Contribute</h3>
   <ul class="list-unstyled" id="list-contribute">
     <li><a href="#" data-target="" id="correction-ace">Correction</a></li>
-    <li><a href="#" data-target="">Submit</a></li>
+    <li id="li-submit-correction"><a href="#" data-target="">Submit</a></li>
   </ul>
 </nav>
 
 <%= content_for(:after_js) do %>
   <script type="text/javascript" charset="utf-8">
     var correction_click = 0;
+    var page_corrected = new String();
+
+    // Affichage du code de la transcription en cliquant sur 'correction'
       $("#correction-ace").on("click", function(){
         if( correction_click == 0 ) {
           $("#transcription-header").text("CODE");
@@ -42,7 +45,22 @@
           editor.setTheme("ace/theme/solarized_light");
           editor.getSession().setMode("ace/mode/xml");
           correction_click += 1;
-          // sortie en cliquant sur exit
+          editor.getSession().on('change', function () {
+            page_corrected = editor.getSession().getValue();
+          });
+          // envoi des données en cliquant sur 'submit'
+          $("#li-submit-correction").on("click", function(){
+
+            // retour à l'affichage de la transcription (copie de 'exit')
+            correction_click -= 1;
+            $("#transcription-header").empty();
+            $("#li-exit-correction").remove();
+            $("#page-transcription").empty();
+            $(".wrapper-correction").removeClass("wrapper-correction").addClass("wrapper-transcription");
+            $(".texte-correction").removeClass("texte-correction").addClass("texte-transcription");
+            $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]);
+          })
+          // retour à l'affichage de la transcription en cliquant sur 'exit'
           $("#li-exit-correction").on("click", function(){
             correction_click -= 1;
             $("#transcription-header").empty();
