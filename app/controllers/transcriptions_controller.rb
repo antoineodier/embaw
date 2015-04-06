@@ -22,6 +22,9 @@ class TranscriptionsController < ApplicationController
     @repository_logo = "logos-bibliotheques/" + @repository_name.parameterize.underscore + "_" + @repository_place.downcase + ".jpg"
     @catalogue_link = @document.css("altIdentifier//idno").text
 
+    # métadonnées sur l'utilisateur (pour l'identification des corrections)
+    @user_email = current_user.email
+
     # diplomatic_transcription
 
     # système de chargement des pages et scans
@@ -41,6 +44,7 @@ class TranscriptionsController < ApplicationController
     #     # -->il faut transférer uniquement les titres + paths pour la navbar
     #   end
 
+
   end
 
   def submit_correction
@@ -51,7 +55,7 @@ class TranscriptionsController < ApplicationController
     # obtention de la référence sha du repository github des transcriptions
     sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
     # création d'une nouvelle branche du repository github des transcriptions
-    client_correction.create_ref("antoineodier/egodocuments-transcriptions", "heads/new_correction_#{@data_correction.first[1][:page_corrected_content]}", sha_egodocuments_transcriptions)
+    client_correction.create_ref("antoineodier/egodocuments-transcriptions", "heads/new_correction_#{@data_correction.first[1][:user_email]}_p_#{@data_correction.first[1][:manuscript_page].to_i}_#{@data_correction.first[1][:time_tag]}", sha_egodocuments_transcriptions)
     # envoi du fichier corrigé
 
   end

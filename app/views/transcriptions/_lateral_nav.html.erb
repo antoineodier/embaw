@@ -30,6 +30,7 @@
   <script type="text/javascript" charset="utf-8">
     var correction_click = 0;
     var page_corrected = new String();
+    var user_email = "<%= user_email %>"
 
     // Affichage du code de la transcription en cliquant sur 'correction'
       $("#correction-ace").on("click", function(){
@@ -53,13 +54,16 @@
             // envoi du contenu de la correction en ajax
             data_correction = {"data_correction": [
                 {"page_corrected_content": page_corrected,
-                "manuscript_page": page_number}
+                "manuscript_page": page_number,
+                "user_email": user_email,
+                "time_tag": moment().format('MMMM_Do_YYYY_h_mm_ss_a')}
               ]}
             $.ajax({
               type: "POST",
               url: "/transcriptions/" + "<%= transcription_id %>" + "/submit_correction",
               data: data_correction,
               dataType: "json",
+              // à supprimer = consol.log
               success: function(data) {
                 console.log("success. data:");
                 console.log(data);
