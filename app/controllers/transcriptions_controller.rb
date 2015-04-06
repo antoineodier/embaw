@@ -44,7 +44,15 @@ class TranscriptionsController < ApplicationController
   end
 
   def submit_correction
+    # réception de la page corrigée
     response_ajax_correction
+    # génération d'un nouveau client avec authentification totale
+    client_correction = Octokit::Client.new(:login => ENV['GITHUB_NAME'], :password => ENV['GITHUB_PASSWORD'])
+    # obtention de la référence sha du repository github des transcriptions
+    sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
+    # création d'une nouvelle branche du repository github des transcriptions
+    client_correction.create_ref("antoineodier/egodocuments-transcriptions", "heads/new_correction_#{@data_correction.first[1][:page_corrected_content]}", sha_egodocuments_transcriptions)
+    # envoi du fichier corrigé
 
   end
 
