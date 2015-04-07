@@ -56,7 +56,19 @@ class TranscriptionsController < ApplicationController
     sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
     # création d'une nouvelle branche du repository github des transcriptions
     client_correction.create_ref("antoineodier/egodocuments-transcriptions", "heads/new_correction_#{@data_correction.first[1][:user_email]}_p_#{@data_correction.first[1][:manuscript_page].to_i}_#{@data_correction.first[1][:time_tag]}", sha_egodocuments_transcriptions)
+    #réinclusion de la page corrigée dans l'array de pages xml
+    array_xml_corrected = @array_pages_xml_normalized
+    array_xml_corrected.each_index do |index|
+      if index == @data_correction.first[1][:manuscript_page]
+        array_xml_corrected[index] = @data_correction.first[1][:manuscript_page]
+      end
+    end
+    #transformation de l'array xml en string xml de toutes les pages
+    array_xml_corrected = array_xml_corrected.each.join
+    #constitution du fichier corrigé à envoyer
+    fichier_xml_corrected = @fichier_xml_normalized[/#{Regexp.escape("<div type=\"volume\">\n")}(.*?)#{Regexp.escape("</text>\n</TEI>\n")}/m, 1] + array_xml_corrected + "         </div>\n      </body>\n  </text>\n</TEI>\n"
     # envoi du fichier corrigé
+    p fichier_xml_corrected
 
   end
 
