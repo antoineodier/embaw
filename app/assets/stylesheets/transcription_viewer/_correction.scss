@@ -18,8 +18,34 @@
 
 .texte-correction {
   border: 5px solid grey;
-  height: 70vh;
+  height: 50vh;
   border-radius: 13px;
+  margin-left: 30px;
+  margin-right: 30px;
+  overflow: scroll;
+}
+
+#bloc-content-git {
+  border: 5px solid grey;
+  border-radius: 13px;
+  margin-top: 5px;
+  margin-left: 30px;
+  margin-right: 30px;
+  height: 20vh;
+}
+
+#text-consigne {
+  text-align: center;
+  font-size: 15px;
+}
+
+#content-pull-request, textarea {
+  border-color: Transparent;
+  resize: none;
+  outline-color: transparent;
+  outline-style: none;
+  height: 10vh;
+  width: 50vh;
   margin-left: 30px;
   margin-right: 30px;
   overflow: scroll;
