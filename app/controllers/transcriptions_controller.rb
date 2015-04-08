@@ -55,7 +55,8 @@ class TranscriptionsController < ApplicationController
     # obtention de la référence sha du repository github des transcriptions
     sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
     # création d'une nouvelle branche du repository github des transcriptions
-    client_correction.create_ref("antoineodier/egodocuments-transcriptions", "heads/new_correction_#{@data_correction.first[1][:user_email]}_p_#{@data_correction.first[1][:manuscript_page].to_i}_#{@data_correction.first[1][:time_tag]}", sha_egodocuments_transcriptions)
+    new_branch_name = "heads/new_correction_#{@data_correction.first[1][:user_email]}_p_#{@data_correction.first[1][:manuscript_page].to_i}_#{@data_correction.first[1][:time_tag]}"
+    client_correction.create_ref("antoineodier/egodocuments-transcriptions", new_branch_name, sha_egodocuments_transcriptions)
 # ----------------------------------------------------------------------------------
         # Réactivation des variables du show
         @transcription = Transcription.find(params[:id])
@@ -64,6 +65,8 @@ class TranscriptionsController < ApplicationController
         @volume_xml_normalized = @fichier_xml_normalized[/#{Regexp.escape("<div type=\"volume\">\n")}(.*?)#{Regexp.escape("</div>")}/m, 1]
         @array_page_numbers = array_page_numbers
         @array_pages_xml_normalized = array_pages_xml_normalized
+        @author_surname = @document.css("author//surname").text
+        @text_title = @document.css("titleStmt//title").text
 # ----------------------------------------------------------------------------------
     #réinclusion de la page corrigée dans l'array de pages xml
     array_xml_corrected = @array_pages_xml_normalized
@@ -72,8 +75,17 @@ class TranscriptionsController < ApplicationController
     array_xml_corrected = array_xml_corrected.join
     #constitution du fichier corrigé à envoyer
     fichier_xml_corrected = @fichier_xml_normalized.split("<div type=\"volume\">\n")[0] + "<div type=\"volume\">\n" + array_xml_corrected + "         </div>\n      </body>\n  </text>\n</TEI>\n"
+    # obtention du code sha du fichier à updater
+    file_path = @transcription.path_to_normalized_transcription
+    array_files_folder = client_correction.contents("antoineodier/egodocuments-transcriptions", ref: new_branch_name, path: scans_folder_id)
+    array_files_folder.select! do |file|
+      file[:path] == file_path
+    end
+    sha_commit = array_files_folder.first[:sha]
     # envoi du fichier corrigé sur git avec 1 nv commit
-
+    new_branch_name = "refs/" + new_branch_name
+    p_git = client_correction.update_contents("antoineodier/egodocuments-transcriptions", file_path, "new_commit_test", sha_commit, fichier_xml_corrected, :branch => new_branch_name)
+    p p_git
   end
 
 end
@@ -157,5 +169,3 @@ end
     def scans_folder_id
       @document.css("author//forename").text.downcase + "_" + @author_surname.downcase + "_" + @text_title.downcase
     end
-
-
