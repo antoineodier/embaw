@@ -86,6 +86,8 @@ class TranscriptionsController < ApplicationController
     new_branch_name = "refs/" + new_branch_name
     p_git = client_correction.update_contents("antoineodier/egodocuments-transcriptions", file_path, "new_commit_test", sha_commit, fichier_xml_corrected, :branch => new_branch_name)
     p p_git
+    # envoi d'1 pull request
+    client_correction.create_pull_request("antoineodier/egodocuments-transcriptions", "refs/heads/master" , new_branch_name, "new correction", "nouveaux changements")
   end
 
 end
