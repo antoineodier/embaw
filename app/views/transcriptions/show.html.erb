@@ -29,7 +29,7 @@
           <%= render "pageup", transcription_id: @transcription.id, scans_folder_id: @scans_folder_id, array_page_numbers: @array_page_numbers %>
           <%= @shared %>
         </h1>
-        <div class="wrapper-transcription bg-white">
+        <div class="wrapper-transcription bg-white" id="text-pull-request">
           <div class="texte-transcription" id="page-transcription">
             <%= raw(@first_loaded_page) %>
           </div>

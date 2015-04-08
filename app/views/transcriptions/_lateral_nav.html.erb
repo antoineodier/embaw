@@ -41,6 +41,7 @@
           $(".texte-transcription").removeClass("texte-transcription").addClass("texte-correction");
           $("#page-transcription").empty();
           $("#page-transcription").append("<div id='page-ace-editor'></div>");
+          $("#text-pull-request").append("<div><h5>Please correct the code above and comment it below:</h5><textarea name='content_pull_request'></textarea></div>");
           $("#page-ace-editor").text(array_pages.responseJSON.array_pages_xml_normalized[page_number]);
           var editor = ace.edit("page-ace-editor");
           editor.setTheme("ace/theme/solarized_light");
