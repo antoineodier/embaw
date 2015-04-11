@@ -23,7 +23,9 @@ class TranscriptionsController < ApplicationController
     @catalogue_link = @document.css("altIdentifier//idno").text
 
     # métadonnées sur l'utilisateur (pour l'identification des corrections)
-    @user_email = current_user.email
+    if @user_email == nil
+      @user_email = current_user.email
+    end
 
     # diplomatic_transcription
 
@@ -58,7 +60,12 @@ class TranscriptionsController < ApplicationController
     sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions', 'heads').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
     # création d'une nouvelle branche du repository github des transcriptions
     new_branch_name = "heads/new_correction_#{@data_correction.first[1][:user_email]}_p_#{@data_correction.first[1][:manuscript_page].to_i}_#{@data_correction.first[1][:time_tag]}"
-    client_correction.create_ref("antoineodier/egodocuments-transcriptions", new_branch_name, sha_egodocuments_transcriptions)
+    test_branche = client_correction.refs('antoineodier/egodocuments-transcriptions', 'heads').select {|element| element[:ref] == "refs/" + new_branch_name}
+    p test_branche
+      if test_branche == []
+        sr = client_correction.create_ref("antoineodier/egodocuments-transcriptions", new_branch_name, sha_egodocuments_transcriptions)
+        p sr
+      end
 # ----------------------------------------------------------------------------------
         # Réactivation des variables du show
         @transcription = Transcription.find(params[:id])

@@ -52,7 +52,7 @@
             page_corrected = editor.getSession().getValue();
           });
           // envoi des données en cliquant sur 'submit'
-          $("#li-submit-correction").on("click", function(){
+          $("#li-submit-correction").one("click", function(){
             // enregistrement des données du message libre et du code
             var time_tag = moment(new Date()).format('MMMM_Do_YYYY_h_mm_ss_a');
             console.log(time_tag);
