@@ -41,40 +41,48 @@
           $(".texte-transcription").removeClass("texte-transcription").addClass("texte-correction");
           $("#page-transcription").empty();
           $("#page-transcription").append("<div id='page-ace-editor'></div>");
-          $("#text-pull-request").append("<div id='bloc-content-git'><h5 id='text-consigne'>Please correct the code above and comment it below:</h5><textarea name='content-pull-request'></textarea></div>");
+          $("#text-pull-request").append("<div id='bloc-content-git'><h5 id='text-consigne'>Please correct the code above, comment it below, <br/>then click on 'submit' or 'exit':</h5><textarea name='content-pull-request'></textarea></div>");
           $("#page-ace-editor").text(array_pages.responseJSON.array_pages_xml_normalized[page_number]);
           var editor = ace.edit("page-ace-editor");
           editor.setTheme("ace/theme/solarized_light");
           editor.getSession().setMode("ace/mode/xml");
           correction_click += 1;
-          editor.getSession().on('change', function () {
-            page_corrected = editor.getSession().getValue();
-          });
+          // editor.getSession().on('change', function () {
+          //   page_corrected = editor.getSession().getValue();
+          // });
           // envoi des données en cliquant sur 'submit'
           $("#li-submit-correction").on("click", function(){
+            // enregistrement des données du message libre et du code
+            var time_tag = moment(new Date()).format('MMMM_Do_YYYY_h_mm_ss_a');
+            console.log(time_tag);
+            var pull_request_message = $('textarea[name=content-pull-request]').val();
+            var page_corrected = editor.getSession().getValue();
             // envoi du contenu de la correction en ajax
             data_correction = {"data_correction": [
                 {"page_corrected_content": page_corrected,
+                "pull_request_message": pull_request_message,
                 "manuscript_page": page_number,
                 "user_email": user_email,
-                "time_tag": moment().format('MMMM_Do_YYYY_h_mm_ss_a')}
+                "time_tag": time_tag}
               ]}
+            console.log(data_correction);
             $.ajax({
               type: "POST",
               url: "/transcriptions/" + "<%= transcription_id %>" + "/submit_correction",
               data: data_correction,
               dataType: "json",
               // à supprimer = consol.log
-              success: function(data) {
-                console.log("success. data:");
-                console.log(data);
-              }
+              // success: function(data) {
+              //   console.log("success. data:");
+              //   console.log(data);
+              // }
             });
             // retour à l'affichage de la transcription (copie de 'exit')
             correction_click -= 1;
             $("#transcription-header").empty();
             $("#li-exit-correction").remove();
             $("#page-transcription").empty();
+            $("#bloc-content-git").remove();
             $(".wrapper-correction").removeClass("wrapper-correction").addClass("wrapper-transcription");
             $(".texte-correction").removeClass("texte-correction").addClass("texte-transcription");
             $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]);
@@ -83,6 +91,7 @@
           $("#li-exit-correction").on("click", function(){
             correction_click -= 1;
             $("#transcription-header").empty();
+            $("#bloc-content-git").remove();
             $("#li-exit-correction").remove();
             $("#page-transcription").empty();
             $(".wrapper-correction").removeClass("wrapper-correction").addClass("wrapper-transcription");

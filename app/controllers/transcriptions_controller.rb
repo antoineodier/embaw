@@ -84,10 +84,10 @@ class TranscriptionsController < ApplicationController
     sha_commit = array_files_folder.first[:sha]
     # envoi du fichier corrigé sur git avec 1 nv commit
     new_branch_name = "refs/" + new_branch_name
-    p_git = client_correction.update_contents("antoineodier/egodocuments-transcriptions", file_path, "new_commit_test", sha_commit, fichier_xml_corrected, :branch => new_branch_name)
-    p p_git
+    pull_request_message = @data_correction.first[1][:pull_request_message]
+    client_correction.update_contents("antoineodier/egodocuments-transcriptions", file_path, "new_commit_test", sha_commit, fichier_xml_corrected, :branch => new_branch_name)
     # envoi d'1 pull request
-    client_correction.create_pull_request("antoineodier/egodocuments-transcriptions", "refs/heads/master" , new_branch_name, "new correction", "nouveaux changements")
+    client_correction.create_pull_request("antoineodier/egodocuments-transcriptions", "refs/heads/master" , new_branch_name, new_branch_name, pull_request_message)
   end
 
 end
