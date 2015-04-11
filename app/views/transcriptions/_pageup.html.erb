@@ -17,7 +17,7 @@
 // click de souris sur page_up
     array_pages.done(
       $("#page_up").on("click", function(){
-        if( page_number + 1 < array_pages.responseJSON.array_pages_html.length ) {
+        if( page_number + 1 < array_pages.responseJSON.array_pages_html.length && $("#li-exit-correction").length == 0) {
           page_number += 1;
           $("#page-transcription").empty();
           $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
@@ -30,7 +30,7 @@
 // click de souris sur page_down
     array_pages.done(
       $("#page_down").on("click", function(){
-        if( page_number > 0 ) {
+        if( page_number > 0 && $("#li-exit-correction").length == 0 ) {
           page_number -= 1;
           $("#page-transcription").empty();
           $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
