@@ -33,6 +33,7 @@
     var user_email = "<%= user_email %>"
 
     // Affichage du code de la transcription en cliquant sur 'correction'
+    $( document ).ready(function() {
       $("#correction-ace").on("click", function(){
         if( correction_click == 0 ) {
           $("#transcription-header").text("CODE");
@@ -47,16 +48,16 @@
           editor.setTheme("ace/theme/solarized_light");
           editor.getSession().setMode("ace/mode/xml");
           correction_click += 1;
-          // editor.getSession().on('change', function () {
-          //   page_corrected = editor.getSession().getValue();
-          // });
+          editor.getSession().on('change', function () {
+            page_corrected = editor.getSession().getValue();
+          });
           // envoi des données en cliquant sur 'submit'
           $("#li-submit-correction").on("click", function(){
             // enregistrement des données du message libre et du code
             var time_tag = moment(new Date()).format('MMMM_Do_YYYY_h_mm_ss_a');
             console.log(time_tag);
             var pull_request_message = $('textarea[name=content-pull-request]').val();
-            var page_corrected = editor.getSession().getValue();
+            // var page_corrected = editor.getSession().getValue();
             // envoi du contenu de la correction en ajax
             data_correction = {"data_correction": [
                 {"page_corrected_content": page_corrected,
@@ -100,6 +101,7 @@
           })
         }
       })
+    });
   </script>
 <% end %>
 

@@ -23,6 +23,7 @@
           $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
           $(".viewer").empty();
           $(".viewer").append("<img src='../assets/manuscripts_scans/" + scans_folder_id + "/" + scans_folder_id + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+          console.log(page_number);
           }
         })
       )
@@ -35,6 +36,7 @@
           $("#page-transcription").append(array_pages.responseJSON.array_pages_html[page_number]).slideDown();
           $(".viewer").empty();
           $(".viewer").append("<img src='../assets/manuscripts_scans/" + scans_folder_id + "/" + scans_folder_id + "-" + array_pages.responseJSON.array_page_numbers[page_number] + ".jpg'" + " " + "class='facsimile' width='85%' height='auto'>");
+          console.log(page_number);
           }
         })
       )
