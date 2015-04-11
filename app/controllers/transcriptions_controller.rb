@@ -43,6 +43,7 @@ class TranscriptionsController < ApplicationController
     #     array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
     #     # -->il faut transférer uniquement les titres + paths pour la navbar
     #   end
+# raise
 
   end
 
@@ -54,7 +55,7 @@ class TranscriptionsController < ApplicationController
     p client_correction
     p client_correction.rate_limit
     # obtention de la référence sha du repository github des transcriptions
-    sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
+    sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions', 'heads').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
     # création d'une nouvelle branche du repository github des transcriptions
     new_branch_name = "heads/new_correction_#{@data_correction.first[1][:user_email]}_p_#{@data_correction.first[1][:manuscript_page].to_i}_#{@data_correction.first[1][:time_tag]}"
     client_correction.create_ref("antoineodier/egodocuments-transcriptions", new_branch_name, sha_egodocuments_transcriptions)
