@@ -44,7 +44,6 @@ class TranscriptionsController < ApplicationController
     #     # -->il faut transférer uniquement les titres + paths pour la navbar
     #   end
 
-
   end
 
   def submit_correction
@@ -52,6 +51,8 @@ class TranscriptionsController < ApplicationController
     response_ajax_correction
     # génération d'un nouveau client avec authentification totale
     client_correction = Octokit::Client.new(:login => ENV['GITHUB_NAME'], :password => ENV['GITHUB_PASSWORD'])
+    p client_correction
+    p client_correction.rate_limit
     # obtention de la référence sha du repository github des transcriptions
     sha_egodocuments_transcriptions = client_correction.refs('antoineodier/egodocuments-transcriptions').select {|element| element[:ref] == "refs/heads/master"}.first[:object][:sha]
     # création d'une nouvelle branche du repository github des transcriptions
@@ -65,6 +66,7 @@ class TranscriptionsController < ApplicationController
         @volume_xml_normalized = @fichier_xml_normalized[/#{Regexp.escape("<div type=\"volume\">\n")}(.*?)#{Regexp.escape("</div>")}/m, 1]
         @array_page_numbers = array_page_numbers
         @array_pages_xml_normalized = array_pages_xml_normalized
+        @author_forename = @document.css("author//forename").text
         @author_surname = @document.css("author//surname").text
         @text_title = @document.css("titleStmt//title").text
 # ----------------------------------------------------------------------------------
@@ -83,11 +85,12 @@ class TranscriptionsController < ApplicationController
     end
     sha_commit = array_files_folder.first[:sha]
     # envoi du fichier corrigé sur git avec 1 nv commit
+    pull_request_title = "New correction from \"" + @data_correction.first[1][:user_email] + "\" for the " + @text_title + " of " + @author_forename + " " + @author_surname + " - " + @document.css("normalization").text
     new_branch_name = "refs/" + new_branch_name
     pull_request_message = @data_correction.first[1][:pull_request_message]
-    client_correction.update_contents("antoineodier/egodocuments-transcriptions", file_path, "new_commit_test", sha_commit, fichier_xml_corrected, :branch => new_branch_name)
+    client_correction.update_contents("antoineodier/egodocuments-transcriptions", file_path, "Corrections - #{@data_correction.first[1][:user_email]}", sha_commit, fichier_xml_corrected, :branch => new_branch_name)
     # envoi d'1 pull request
-    client_correction.create_pull_request("antoineodier/egodocuments-transcriptions", "refs/heads/master" , new_branch_name, new_branch_name, pull_request_message)
+    client_correction.create_pull_request("antoineodier/egodocuments-transcriptions", "refs/heads/master" , new_branch_name, pull_request_title, pull_request_message)
   end
 
 end
@@ -131,17 +134,23 @@ end
     def array_pages_xml_normalized
       array_pages_xml_contenu = []
       @array_page_numbers.each_with_index do |page_number, index|
-        if page_number != @array_page_numbers.last
-          array_pages_xml_contenu << display_page_xml(index)
+        if page_number == @array_page_numbers.first
+          array_pages_xml_contenu << display_first_page_xml(index)
         elsif page_number == @array_page_numbers.last
           array_pages_xml_contenu << display_last_page_xml(index)
+        else
+          array_pages_xml_contenu << display_page_xml(index)
         end
       end
       return array_pages_xml_contenu
     end
 
+    def display_first_page_xml(page_number)
+      /^\s*<pb n=\"#{@array_page_numbers[page_number.to_i]}\"\/>\n/.match(@volume_xml_normalized.to_s).to_s +  @volume_xml_normalized[/#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n")}(.*?)#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i + 1]}\"/>\n")}/m, 1]
+    end
+
     def display_page_xml(page_number)
-      "<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n" + @volume_xml_normalized[/#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n")}(.*?)#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i + 1]}\"/>\n")}/m, 1]
+      "<pb n=\"#{@array_page_numbers[page_number.to_i]}\"\/>\n" +  @volume_xml_normalized[/#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i]}\"/>\n")}(.*?)#{Regexp.escape("<pb n=\"#{@array_page_numbers[page_number.to_i + 1]}\"/>\n")}/m, 1]
     end
 
     def display_last_page_xml(page_number)
