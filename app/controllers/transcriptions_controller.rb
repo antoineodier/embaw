@@ -7,7 +7,7 @@ class TranscriptionsController < ApplicationController
     @array_transcriptions_headers = array_transcriptions_headers
     @array_titles = array_titles
 
-raise
+# raise
 
     #sélection de la transcription
     @transcription = Transcription.find(params[:id])
