@@ -3,6 +3,12 @@ require 'open-uri'
 class TranscriptionsController < ApplicationController
 
   def show
+    #navbar latérale
+    @array_transcriptions_headers = array_transcriptions_headers
+    @array_titles = array_titles
+
+raise
+
     #sélection de la transcription
     @transcription = Transcription.find(params[:id])
 
@@ -104,6 +110,32 @@ class TranscriptionsController < ApplicationController
 end
 
   private
+
+# méthodes navbar
+
+# convoque toutes les transcription, les prend sur Github et les configure en nokogiri pour permettre les recherches css/xpath
+  def array_transcriptions_headers
+      array_transcriptions_headers = []
+      Transcription.all.each do |transcription|
+        array_transcriptions_headers << Nokogiri::XML(transcription.xml_content_normalized[/#{Regexp.escape("<teiHeader>\n")}(.*?)#{Regexp.escape("</teiHeader>")}/m, 1])
+      end
+      return array_transcriptions_headers
+  end
+
+# constitue un array avec tous les titres
+  def array_titles
+    array_titles = []
+    @array_transcriptions_headers.each do |header|
+      array_titles << header.css("titleStmt//title").text
+    end
+    return array_titles
+  end
+
+# constitue un array avec tous les noms d'auteurs
+
+
+
+
 
   # méthodes de la correction sur github
 
