@@ -2,14 +2,16 @@
   <h3 class="text-center">Manuscripts</h3>
   <ul class="list-unstyled">
     <%  hash_titres_navbar.each do |text_id, title| %>
-      <li><a href="#" data-target="transcriptions/#{text_id}"><%= title %></a></li>
+      <li>
+        <%=  link_to title, transcription_path(text_id) %>
+      </li>
     <% end %>
   </ul>
   <h3 class="text-center">Rendering</h3>
   <ul class="list-unstyled">
-    <li><a href="#" data-target="">Diplomatic</a></li>
-    <li><a href="#" data-target="">Normalized</a></li>
-    <li><a href="#" data-target="">Translation</a></li>
+    <li><a href="#" >Diplomatic</a></li>
+    <li><a href="#" >Normalized</a></li>
+    <li><a href="#" >Translation</a></li>
   </ul>
   <h3 class="text-center">Informations</h3>
   <ul class="list-unstyled">
@@ -121,7 +123,7 @@ function activeLink () {
 
 function scrollTo () {
   $('.mainMenu a').click(function(e) {
-      e.preventDefault();
+      // e.preventDefault(); --> supprimé pcq désactive l'ouverture du lien href
       $('.mainMenu a').removeClass('active');
       $(this).addClass('active');
 
@@ -185,7 +187,7 @@ function scrollToTop () {
   });
 
   backToTop.click( function(e) {
-    e.preventDefault();
+    // e.preventDefault(); --> supprimé pcq désactive l'ouverture du lien href
     $( '.mainMenu li a' ).removeClass( 'active' );
     $( '.mainMenu li a:first' ).addClass( 'active' );
     $('body').animate( {scrollTop : 0}, 'slow' );
