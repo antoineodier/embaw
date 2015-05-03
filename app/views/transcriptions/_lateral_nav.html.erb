@@ -1,12 +1,9 @@
 <nav class="mainMenu">
   <h3 class="text-center">Manuscripts</h3>
   <ul class="list-unstyled">
-    <%=  %>
-      <li><a href="#" data-target=""> Texte 1</a></li>
-      <li><a href="#" data-target=""> Texte 2</a></li>
-      <li><a href="#" data-target=""> Texte 3</a></li>
-      <li><a href="#" data-target=""> Texte 4</a></li>
-      <li><a href="#" data-target=""> Texte 5</a></li>
+    <%  hash_titres_navbar.each do |text_id, title| %>
+      <li><a href="#" data-target="transcriptions/#{text_id}"><%= title %></a></li>
+    <% end %>
   </ul>
   <h3 class="text-center">Rendering</h3>
   <ul class="list-unstyled">

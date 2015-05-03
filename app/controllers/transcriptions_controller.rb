@@ -6,8 +6,7 @@ class TranscriptionsController < ApplicationController
     #navbar latérale
     @array_transcriptions_headers = array_transcriptions_headers
     @array_titles = array_titles
-
-# raise
+    @array_names = array_names
 
     #sélection de la transcription
     @transcription = Transcription.find(params[:id])
@@ -35,6 +34,25 @@ class TranscriptionsController < ApplicationController
 
     # diplomatic_transcription
 
+    # sélection de toutes les transcriptions pour la navbar latérale
+    array_headers_transcriptions = Transcription.all
+    # création d'1 array contenant les headers de toutes les transcriptions(normalisées)
+    hash_headers_transcriptions = {}
+    array_headers_transcriptions.each do |text|
+        hash_headers_transcriptions[text.id] = Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
+      end
+    # création d'1 array contenant tous les titres + paths des transcriptions
+    hash_titres_navbar = {}
+    hash_headers_transcriptions.each do |header_id, header|
+        hash_titres_navbar[header_id] = header.css("author//forename").text.first + "." + header.css("author//surname").text + "-" + header.css("titleStmt//title").text
+      end
+    # modifications pour les titres-auteurs complexes
+    hash_titres_navbar[14] = hash_titres_navbar[14].split[0..1].join(" ")
+    hash_titres_navbar[12] = hash_headers_transcriptions[12].css("author//forename").text.first + "." +hash_headers_transcriptions[12].css("author//surname").text + " " + hash_headers_transcriptions[12].css("author//nameLink").text + " " + hash_headers_transcriptions[12].css("author//placeName").text + "-" + hash_headers_transcriptions[12].css("titleStmt//title").text
+    hash_titres_navbar[13] = hash_headers_transcriptions[13].css("author//forename[@type='hebrew_chars']").text + "-" + hash_headers_transcriptions[13].css("titleStmt//title[@type='hebrew_chars']").text
+    # array en variable d'instance pour la lateral-nav
+    @hash_titres_navbar = hash_titres_navbar
+
     # système de chargement des pages et scans
     @array_page_numbers = array_page_numbers
     @array_pages_html = array_pages_html
@@ -43,16 +61,6 @@ class TranscriptionsController < ApplicationController
     @first_loaded_facsimile = "manuscripts_scans/" + @scans_folder_id + "/" + @scans_folder_id + "-" + @array_page_numbers[0] + ".jpg"
     @array_pages_xml_normalized = array_pages_xml_normalized
     response_ajax
-
-    # sélection de toutes les transcriptions pour la navbar latérale
-    # array_transcriptions_1 = Transcription.all
-    # array_transcriptions = []
-    # array_transcriptions_1.each do |text|
-    #     array_transcriptions << Nokogiri::XML(text.xml_content_normalized).css("teiHeader")
-    #     # -->il faut transférer uniquement les titres + paths pour la navbar
-    #   end
-# raise
-
   end
 
   def submit_correction
@@ -111,40 +119,49 @@ end
 
   private
 
-# méthodes navbar
+# 1. méthodes navbar
 
-# convoque toutes les transcription, les prend sur Github et les configure en nokogiri pour permettre les recherches css/xpath
-  def array_transcriptions_headers
-      array_transcriptions_headers = []
-      Transcription.all.each do |transcription|
-        array_transcriptions_headers << Nokogiri::XML(transcription.xml_content_normalized[/#{Regexp.escape("<teiHeader>\n")}(.*?)#{Regexp.escape("</teiHeader>")}/m, 1])
-      end
-      return array_transcriptions_headers
-  end
-
-# constitue un array avec tous les titres
-  def array_titles
-    array_titles = []
-    @array_transcriptions_headers.each do |header|
-      array_titles << header.css("titleStmt//title").text
+  # 1.1 convoque toutes les transcription, les prend sur Github et les configure en nokogiri pour permettre les recherches css/xpath
+    def array_transcriptions_headers
+        array_transcriptions_headers = []
+        Transcription.all.each do |transcription|
+          array_transcriptions_headers << Nokogiri::XML(transcription.xml_content_normalized[/#{Regexp.escape("<teiHeader>\n")}(.*?)#{Regexp.escape("</teiHeader>")}/m, 1])
+        end
+        return array_transcriptions_headers
     end
-    return array_titles
-  end
 
-# constitue un array avec tous les noms d'auteurs
+  # 1.2 constitue un array avec tous les titres
+    def array_titles
+      array_titles = []
+      @array_transcriptions_headers.each do |header|
+        array_titles << header.css("titleStmt//title").text
+      end
+      return array_titles
+    end
+
+  # 1.3 constitue un array avec tous les noms d'auteurs
+    def array_names
+      array_names = []
+      @array_transcriptions_headers.each do |header|
+        if header = @array_transcriptions_headers[2]
+          array_names << header.css("author//forename").text
+        else
+            array_names << header.css("author//forename").text.first.upcase + ". " + header.css("author//surname").text
+        end
+      end
+      return array_names
+    end
 
 
-
-
-
-  # méthodes de la correction sur github
+# 2. méthodes de la correction sur github
 
   def response_ajax_correction
     @data_correction = params[:data_correction]
     render :json => @data_correction
   end
 
-  # méthodes du show
+
+# 3. méthodes du show - changement de page
 
     def transcription_params
       params.require(:transcription, :template).permit(:path_to_xml_file)
