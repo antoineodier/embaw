@@ -3,5 +3,4 @@
 Early modern egodocuments digital edition platform using xml-tei.
 For more information, please go to: http://www.embaw.eu
 
-![ScreenShot](https://raw.github.com/antoineodier/embaw/master/app/assets/images/home/home_screenshot.jpg)
-![ScreenShot](https://raw.github.com/antoineodier/embaw/master/app/assets/images/home/home_screenshot.jp2)
+![ScreenShot](https://raw.github.com/antoineodier/embaw/master/app/assets/images/home/home_screenshot.png)
