@@ -10,4 +10,5 @@
 /tags
 /tmp/*
 /config/application.yml
-/app/assets/images/manuscripts_scans
+/config/secrets.yml
+/app/assets/images/manuscripts_scans/*
