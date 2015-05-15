@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    transcription_path(11)
+    transcription_path(1)
   end
 
   def user_not_authorized
