@@ -3,13 +3,13 @@
   <ul class="list-unstyled">
     <%  hash_titres_navbar.each do |text_id, title| %>
       <li>
-        <%=  link_to title, transcription_path(text_id) %>
+        <%=  link_to title, transcription_path(text_id), :class => ("activate-" + text_id.to_s) %>
       </li>
     <% end %>
   </ul>
   <h3 class="text-center">Rendering</h3>
   <ul class="list-unstyled">
-    <li><a href="#" >Diplomatic</a></li>
+    <li><a class="activate-1" href="#" >Diplomatic</a></li>
     <li><a href="#" >Normalized</a></li>
     <li><a href="#" >Translation</a></li>
   </ul>

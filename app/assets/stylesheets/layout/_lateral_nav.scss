@@ -38,6 +38,13 @@ body {
     margin-left:5px;
     li {
       padding: 3px 0;
+
+      .activate-1 {
+        font-weight: 900;
+        color: rgba(255,255,255,1);
+        margin-left: 10px;
+      }
+
       a {
        color: rgba(255,255,255,0.5);
        text-decoration:none;
