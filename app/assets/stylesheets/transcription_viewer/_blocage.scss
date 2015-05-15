@@ -1,0 +1,27 @@
+.blocage {
+  color: white;
+    > a:link {
+    color: white;
+    transition: all 1s;
+    }
+    a:focus {
+      color: white;
+    }
+    a:hover {
+      color: white;
+    }
+  }
+
+#blocage-white {
+  color: white;
+    > a:link {
+    color: white;
+    transition: all 10s;
+    }
+    a:focus {
+      color: white;
+    }
+    a:hover {
+      color: white;
+    }
+  }

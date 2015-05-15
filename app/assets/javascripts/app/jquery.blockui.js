@@ -1,70 +1,3 @@
-<div class="page-color">
-  <div class="row hauteur">
-    <div class="bg-blue">
-      <div class="col-xs-2" >
-      </div>
-      <div class="col-xs-4" >
-        <h1 class="text-center margin-titre-facsimile page-up-down">
-          <%= render "pagedown", transcription_id: @transcription.id, scans_folder_id: @scans_folder_id, array_page_numbers: @array_page_numbers %>
-          FACSIMILE
-        </h1>
-        <section>
-        <div class="wrapper-facsimile">
-          <section>
-            <div class="bg-white viewer">
-              <%= image_tag (@first_loaded_facsimile), class: "facsimile", height: "auto", width: "85%" %>
-            </div>
-            <div class="text-center buttons-position">
-                <button class="zoom-in btn-black"><i class="fa fa-search-plus"></i></button>
-                <button class="reset btn-black"><i class="fa fa-file-text-o"></i></button>
-                <button class="zoom-out btn-black"><i class="fa fa-search-minus"></i></button>
-              </div>
-          </section>
-        </div>
-      </div>
-      </section>
-      <div class="col-xs-4" >
-        <h1 class="text-center margin-titre-transcription page-up-down">
-          TRANSCRIPTION <span id="transcription-header"></span>
-          <%= render "pageup", transcription_id: @transcription.id, scans_folder_id: @scans_folder_id, array_page_numbers: @array_page_numbers %>
-          <%= @shared %>
-        </h1>
-        <div class="wrapper-transcription bg-white" id="text-pull-request">
-          <div class="texte-transcription" id="page-transcription">
-            <%= raw(@first_loaded_page) %>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-2" >
-      </div>
-    </div>
-  </div>
-  <div class="text-center quote-library">
-    <h5><i>Reproduced by permission of <%= @repository_name %>, <%= @repository_place %> (<%= @repository_country %>)</i></h5>
-    <%= link_to image_tag(@repository_logo, :class => "logo-resize"), @catalogue_link %>
-  </div>
-</div>
-
-<%= content_for(:after_js) do %>
-  <script>
-     (function() {
-          var $section = $('section');
-          $section.find('.viewer').panzoom({
-            $zoomIn: $section.find(".zoom-in"),
-            $zoomOut: $section.find(".zoom-out"),
-            $zoomRange: $section.find(".zoom-range"),
-            $reset: $section.find(".reset")
-          });
-        })();
-  </script>
-<% end %>
-
-<%= render "lateral_nav", hash_titres_navbar: @hash_titres_navbar, transcription_id: @transcription.id, user_email: @user_email %>
-
-
-<%= content_for(:after_js) do %>
-  <script>
-
 /*!
  * jQuery blockUI plugin
  * Version 2.70.0-2014.11.23
@@ -179,7 +112,7 @@
     // override these in your code to change the default behavior and style
     $.blockUI.defaults = {
       // message displayed when blocking (use null for no message)
-      message:  '<h1 class="blocage"><a href="/" id="blocage-white">Reading Platform<br/>to be released<br/>soon</a></h1>',
+      message:  '<h1>Please wait...</h1>',
 
       title: null,    // title string; only used when theme == true
       draggable: true,  // only used when theme == true (requires jquery-ui.js to be loaded)
@@ -192,7 +125,7 @@
       css: {
         padding:  0,
         margin:   0,
-        width:    '35%',
+        width:    '30%',
         top:    '40%',
         left:   '35%',
         textAlign:  'center',
@@ -685,55 +618,3 @@
   }
 
 })();
-
-
-  $(document).ready(function() {
-    $.blockUI({
-
-
-            // message:  '<p>Reading Platform to be released soon. <br/> Please try again later</p>',
-               fadeIn: 700,
-            showOverlay: true,
-
-// css: {
-//             border: 'none',
-//             padding: '15px',
-//             backgroundColor: '#000',
-//             '-webkit-border-radius': '10px',
-//             '-moz-border-radius': '10px',
-//             opacity: .5,
-//             color: '#fff'
-//         }
-
-            centerY: false,
-            css: {
-                width: '400px',
-            //     top: '10px',
-            //     left: '',
-            //     right: '10px',
-                border: 'none',
-                padding: '5px',
-                backgroundColor: '#000',
-                '-webkit-border-radius': '10px',
-                '-moz-border-radius': '10px',
-                // opacity: .6,
-                color: '#fff'
-            }
-             });
-
-  });
-  </script>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
