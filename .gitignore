@@ -11,6 +11,5 @@
 /tmp/*
 /config/application.yml
 /config/secrets.yml
-/app/assets/images/manuscripts_scans/*
 # Ignore application configuration
 /config/application.yml
